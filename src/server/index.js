@@ -15,13 +15,23 @@ const app = express();
 
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 
-app.get("/api/test/terminal", (req, res) => {
+app.post("/api/test/search/", (req, res) => {
     console.log(`ℹ️  (${req.method.toUpperCase()}) ${req.url}`);
     const rep = {
         truc: [
             {
                 _id: {$oid: "5393803ce0b8c05979c6ea65"},
-                bank: {$oid: "53937660e0b8c05979c6ea55"},
+                bank: {
+                    _id: {$oid: "53937660e0b8c05979c6ea55"},
+                    country: "BE",
+                    color: "4a961d",
+                    name: "Argenta",
+                    icon: "argenta.png",
+                    url: "http://www.argenta.be",
+                    created_at: "2013-06-06 20:40:38",
+                    updated_at: "2013-06-06 20:40:38",
+                    deleted_at: null,
+                },
                 latitude: 51.1069,
                 longitude: 2.64824,
                 address: "Zeelaan 67, 8670 Koksijde",
@@ -31,7 +41,17 @@ app.get("/api/test/terminal", (req, res) => {
             },
             {
                 _id: {$oid: "5393803ce0b8c05979c6ea65"},
-                bank: {$oid: "53937660e0b8c05979c6ea55"},
+                bank: {
+                    _id: {$oid: "53937660e0b8c05979c6ea55"},
+                    country: "BE",
+                    color: "4a961d",
+                    name: "Argenta",
+                    icon: "argenta.png",
+                    url: "http://www.argenta.be",
+                    created_at: "2013-06-06 20:40:38",
+                    updated_at: "2013-06-06 20:40:38",
+                    deleted_at: null,
+                },
                 latitude: 51.1069,
                 longitude: 2.64824,
                 address: "Zeelaan 67, 8670 Koksijde",
@@ -41,53 +61,22 @@ app.get("/api/test/terminal", (req, res) => {
             },
             {
                 _id: {$oid: "5393803ce0b8c05979c6ea65"},
-                bank: {$oid: "53937660e0b8c05979c6ea55"},
+                bank: {
+                    _id: {$oid: "53937660e0b8c05979c6ea55"},
+                    country: "BE",
+                    color: "4a961d",
+                    name: "Argenta",
+                    icon: "argenta.png",
+                    url: "http://www.argenta.be",
+                    created_at: "2013-06-06 20:40:38",
+                    updated_at: "2013-06-06 20:40:38",
+                    deleted_at: null,
+                },
                 latitude: 51.1069,
                 longitude: 2.64824,
                 address: "Zeelaan 67, 8670 Koksijde",
                 created_at: "2013-06-10 18:43:44",
                 updated_at: "2013-06-10 18:43:44",
-                deleted_at: null,
-            },
-        ],
-    };
-    res.send(rep);
-});
-app.get("/api/test/terminal", (req, res) => {
-    console.log(`ℹ️  (${req.method.toUpperCase()}) ${req.url}`);
-    const rep = {
-        truc: [
-            {
-                _id: {$oid: "53937660e0b8c05979c6ea55"},
-                country: "BE",
-                color: "4a961d",
-                name: "Argenta",
-                icon: "argenta.png",
-                url: "http://www.argenta.be",
-                created_at: "2013-06-06 20:40:38",
-                updated_at: "2013-06-06 20:40:38",
-                deleted_at: null,
-            },
-            {
-                _id: {$oid: "53937660e0b8c05979c6ea55"},
-                country: "BE",
-                color: "4a961d",
-                name: "Argenta",
-                icon: "argenta.png",
-                url: "http://www.argenta.be",
-                created_at: "2013-06-06 20:40:38",
-                updated_at: "2013-06-06 20:40:38",
-                deleted_at: null,
-            },
-            {
-                _id: {$oid: "53937660e0b8c05979c6ea55"},
-                country: "BE",
-                color: "4a961d",
-                name: "Argenta",
-                icon: "argenta.png",
-                url: "http://www.argenta.be",
-                created_at: "2013-06-06 20:40:38",
-                updated_at: "2013-06-06 20:40:38",
                 deleted_at: null,
             },
         ],
