@@ -8,8 +8,11 @@
 
 import express from "express";
 import path from "path";
+const mongo = require("mongodb").MongoClient;
 
 const {APP_PORT} = process.env;
+
+const url = "mongodb://dev:dev@mongo:27017";
 
 const app = express();
 
@@ -82,6 +85,42 @@ app.post("/api/test/search/", (req, res) => {
         ],
     };
     res.send(rep);
+});
+
+app.post("/api/search/:longitude/:latitude/:offset/:limit", (req, res) => {
+    console.log(
+        `${req.params.longitude} : ${req.params.latitude} - ${req.params.offset} -> ${req.params.limit}`,
+    );
+
+    let rep = {
+        data: "In construct",
+    };
+
+    //requête mongo
+    mongo.connect(
+        url,
+        {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        },
+        (err, client) => {
+            if (err) {
+                console.error(err);
+                return;
+            }
+            console.log("sucess");
+            const db = client.db("trouvkash");
+            const collection = db.collection("banks");
+            collection.find({}).toArray((err2, items) => {
+                console.log(items);
+                rep = {
+                    data: items,
+                };
+                res.send(rep);
+                client.close();
+            });
+        },
+    );
 });
 
 app.listen(APP_PORT, () =>
