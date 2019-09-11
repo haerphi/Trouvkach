@@ -6,6 +6,7 @@
  * started at 06/09/2019
  */
 
+import "@babel/polyfill";
 import * as React from "react";
 import ReactDOM from "react-dom";
 
