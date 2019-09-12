@@ -62,7 +62,40 @@ export const mongoRequest = async (long, lat, offset, limit) => {
     client.close();
 
     const rep = {
-        data: items,
+        truc: items,
+    };
+    return rep;
+};
+
+export const mongoRequestZoom = async (long, lat, dist) => {
+    console.log(parseFloat(long), parseFloat(lat), parseInt(dist));
+    const client = await mongo.connect(url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+    const db = client.db("trouvkash");
+    const collection = db.collection("terminals");
+
+    const items = await collection
+        .aggregate([
+            {
+                $geoNear: {
+                    near: {
+                        type: "Point",
+                        coordinates: [parseFloat(long), parseFloat(lat)],
+                    },
+                    distanceField: "dist.calculated",
+                    maxDistance: parseInt(dist),
+                },
+            },
+        ])
+        .toArray();
+    console.log(items);
+
+    client.close();
+
+    const rep = {
+        truc: items,
     };
     return rep;
 };
