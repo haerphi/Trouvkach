@@ -38,6 +38,13 @@ app.post("/api/test/search/", (req, res) => {
                 created_at: "2013-06-10 18:43:44",
                 updated_at: "2013-06-10 18:43:44",
                 deleted_at: null,
+                location: {
+                    type: "Point",
+                    coordinates: [51.2159, 2.89],
+                },
+                dist: {
+                    calculated: 0,
+                },
             },
             {
                 _id: {$oid: "5393803ce0b8c05979c6ea65"},
@@ -45,7 +52,7 @@ app.post("/api/test/search/", (req, res) => {
                     _id: {$oid: "53937660e0b8c05979c6ea55"},
                     country: "BE",
                     color: "4a961d",
-                    name: "Argenta",
+                    name: "gnagnagna",
                     icon: "argenta.png",
                     url: "http://www.argenta.be",
                     created_at: "2013-06-06 20:40:38",
@@ -58,6 +65,13 @@ app.post("/api/test/search/", (req, res) => {
                 created_at: "2013-06-10 18:43:44",
                 updated_at: "2013-06-10 18:43:44",
                 deleted_at: null,
+                location: {
+                    type: "Point",
+                    coordinates: [51.2159, 2.89],
+                },
+                dist: {
+                    calculated: 0,
+                },
             },
             {
                 _id: {$oid: "5393803ce0b8c05979c6ea65"},
@@ -65,7 +79,7 @@ app.post("/api/test/search/", (req, res) => {
                     _id: {$oid: "53937660e0b8c05979c6ea55"},
                     country: "BE",
                     color: "4a961d",
-                    name: "Argenta",
+                    name: "maBite",
                     icon: "argenta.png",
                     url: "http://www.argenta.be",
                     created_at: "2013-06-06 20:40:38",
@@ -78,6 +92,13 @@ app.post("/api/test/search/", (req, res) => {
                 created_at: "2013-06-10 18:43:44",
                 updated_at: "2013-06-10 18:43:44",
                 deleted_at: null,
+                location: {
+                    type: "Point",
+                    coordinates: [51.2159, 2.89],
+                },
+                dist: {
+                    calculated: 0,
+                },
             },
         ],
     };
