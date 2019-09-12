@@ -30,5 +30,5 @@ export default function TerminalItem(props) {
         })();
     }, []); // pour l'explication du tableau, voir plus haut ^^
 
-    return <div>{terminal}</div>;
+    return <div className={"results-items-container"}>{terminal}</div>;
 }

@@ -1,0 +1,117 @@
+@charset "UTF-8";
+
+// LOAD FONTS
+// NO FONTS FOR NOW.
+
+html {
+    position: relative;
+    font-size: 16px;
+    overflow-x: hidden;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    background-color: #fff;
+}
+
+.hide {
+    display: none;
+}
+
+input,
+select,
+a,
+i,
+button {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+ul,
+ol,
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+a {
+    display: block;
+    text-decoration: none;
+    color: #000000;
+}
+
+.no-select,
+img {
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    -khtml-user-select: none !important;
+    -moz-user-select: none !important;
+    -o-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+
+.no-transition {
+    -webkit-transition: none !important;
+    -moz-transition: none !important;
+    -o-transition: none !important;
+    -ms-transition: none !important;
+    transition: none !important;
+}
+
+.break-long-words {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    -ms-word-break: break-all;
+    word-break: break-all;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    -moz-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+}
+
+.overflow-y-hidden {
+    overflow-y: hidden;
+}
+
+.overflow-x-hidden {
+    overflow-x: hidden;
+}
+
+.overflow-hidden {
+    overflow: hidden;
+}
+
+.align-left {
+    text-align: left !important;
+}
+
+.align-right {
+    text-align: right !important;
+}
+
+.align-center {
+    text-align: center !important;
+}
+
+.align-middle {
+    vertical-align: middle;
+}
+
+/* LEAFLET STYLES */
+
+.leaflet-control-container {
+    position: absolute;
+    right: 56px;
+    top: 45%;
+}
