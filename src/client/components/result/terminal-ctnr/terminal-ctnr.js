@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import utils from "../../../js/utils";
 import ViewTerminal from "./view-terminal";
 
-export default function TerminalItem() {
+export default function TerminalItem(props) {
     const [terminal, setTerminal] = useState([]);
     /*useEffect(yourCallback, []) - will trigger the callback only after the first render.Detailed explanation
     useEffect runs by default after every render of the component (thus causing an effect).
@@ -19,7 +19,12 @@ export default function TerminalItem() {
             const data = await utils.getTerminalAsync();
             let listKey = 0; // id for react list key
             const dataArr = data.truc.map(item => (
-                <ViewTerminal key={++listKey} view={item.address} obj={item} />
+                <ViewTerminal
+                    key={++listKey}
+                    view={item.address}
+                    obj={item}
+                    setdescription={props.setDesc}
+                />
             ));
             setTerminal(dataArr);
         })();

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Map, TileLayer, Marker, Popup} from "react-leaflet";
 
 export default function mapCtnr(props) {
@@ -8,9 +8,9 @@ export default function mapCtnr(props) {
     const [zoom, setzoom] = useState(13);
     */
 
-    const [lat] = useState(props.latitude);
-    const [lng] = useState(props.longitude);
-    const [zoom] = useState(props.zoom);
+    const lat = props.latitude;
+    const lng = props.longitude;
+    const zoom = props.zoom;
 
     return (
         <Map
@@ -24,13 +24,10 @@ export default function mapCtnr(props) {
                 url={"https://{s}.tile.osm.org/{z}/{x}/{y}.png"}
             />
             <Marker position={[lat, lng]}>
-                <Popup>{"A pretty CSS3 popup.  Easily customizable."}</Popup>
+                <Popup>{"Your Position"}</Popup>
             </Marker>
-            <Marker position={[13.1, lng]}>
-                <Popup>{"A pretty CSS3 popup.  Easily customizable."}</Popup>
-            </Marker>
-            <Marker position={[lat, 0.6]}>
-                <Popup>{"A pretty CSS3 popup.  Easily customizable."}</Popup>
+            <Marker position={[props.onitemLatitude, props.onitemLongitude]}>
+                <Popup>{"The bank"}</Popup>
             </Marker>
         </Map>
     );
