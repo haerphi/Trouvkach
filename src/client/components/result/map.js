@@ -16,7 +16,12 @@ export default function mapCtnr(props) {
         <Map
             center={[lat, lng]}
             zoom={zoom}
-            style={{height: "200px", width: "200px"}}>
+            style={{
+                height: "calc(50vh - 64px)",
+                width: "100%",
+            }}
+            attributionControl={false}
+            scrollWheelZoom={false}>
             <TileLayer
                 attribution={
                     '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
