@@ -8,7 +8,7 @@
 
 import express from "express";
 import path from "path";
-import {verify, mongoRequest} from "./mongofunctions";
+import {verify, mongoRequest, mongoRequestZoom} from "./mongofunctions";
 
 const {APP_PORT} = process.env;
 
@@ -87,10 +87,21 @@ app.post("/api/test/search/", (req, res) => {
     res.send(rep);
 });
 
+app.post("/api/search/:longitude/:latitude/:zoom", (req, res) => {
+    console.log(`Zoom`);
+
+    //requête mongo
+    mongoRequestZoom(
+        req.params.longitude,
+        req.params.latitude,
+        req.params.zoom,
+    ).then(rep => {
+        res.send(rep);
+    });
+});
+
 app.post("/api/search/:longitude/:latitude/:offset/:limit", (req, res) => {
-    console.log(
-        `${req.params.longitude} : ${req.params.latitude} - ${req.params.offset} -> ${req.params.limit}`,
-    );
+    console.log(`Offset and limit`);
 
     //requête mongo
     mongoRequest(
