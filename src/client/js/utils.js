@@ -1,5 +1,5 @@
-exports.getTerminalAsync = async () => {
-    const response = await fetch("/api/test/search/", {
+exports.getTerminalAsync = async (long, lat, zoom) => {
+    const response = await fetch(`/api/search/${long}/${lat}/${zoom}`, {
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
