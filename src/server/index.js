@@ -8,8 +8,11 @@
 
 import express from "express";
 import path from "path";
+import {verify, mongoRequest, mongoRequestZoom} from "./mongofunctions";
 
 const {APP_PORT} = process.env;
+
+verify();
 
 const app = express();
 
@@ -103,6 +106,33 @@ app.post("/api/test/search/", (req, res) => {
         ],
     };
     res.send(rep);
+});
+
+app.post("/api/search/:longitude/:latitude/:zoom", (req, res) => {
+    console.log(`Zoom`);
+
+    //requête mongo
+    mongoRequestZoom(
+        req.params.longitude,
+        req.params.latitude,
+        req.params.zoom,
+    ).then(rep => {
+        res.send(rep);
+    });
+});
+
+app.post("/api/search/:longitude/:latitude/:offset/:limit", (req, res) => {
+    console.log(`Offset and limit`);
+
+    //requête mongo
+    mongoRequest(
+        req.params.longitude,
+        req.params.latitude,
+        req.params.offset,
+        req.params.limit,
+    ).then(rep => {
+        res.send(rep);
+    });
 });
 
 app.listen(APP_PORT, () =>
