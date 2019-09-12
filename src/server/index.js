@@ -8,7 +8,12 @@
 
 import express from "express";
 import path from "path";
-import {verify, mongoRequest, mongoRequestZoom} from "./mongofunctions";
+import {
+    verify,
+    mongoRequest,
+    mongoRequestZoom,
+    mongoRequestBanks,
+} from "./mongofunctions";
 
 const {APP_PORT} = process.env;
 
@@ -131,6 +136,15 @@ app.post("/api/search/:longitude/:latitude/:offset/:limit", (req, res) => {
         req.params.offset,
         req.params.limit,
     ).then(rep => {
+        res.send(rep);
+    });
+});
+
+app.post("/api/search/banks/", (req, res) => {
+    console.log(`Banks`);
+
+    //requête mongo
+    mongoRequestBanks().then(rep => {
         res.send(rep);
     });
 });
