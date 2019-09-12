@@ -1,16 +1,17 @@
-import * as React from "react";
-
+import React from "react";
 import ResultCpn from "./result/result";
+import Header from "./header";
 //import ItemCpn from "./item/item";
 
 const resultPage = <ResultCpn />;
 //const itemPage = <ItemCpn />;
 
 const MainPage = () => (
-    <div>
+    <React.Fragment>
+        <Header />
         {resultPage}
         {/*itemPage modal*/}
-    </div>
+    </React.Fragment>
 );
 
 export default MainPage;
