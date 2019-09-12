@@ -43,6 +43,25 @@ export const verify = async () => {
     client.close();
 };
 
+export const mongoRequestBanks = async () => {
+    const client = await mongo.connect(url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+    const db = client.db("trouvkash");
+    const collection = db.collection("banks");
+
+    const banks = await collection.find({}).toArray();
+    console.log(banks);
+
+    client.close();
+
+    const rep = {
+        truc: banks,
+    };
+    return rep;
+};
+
 //forget this one
 export const mongoRequest = async (long, lat, offset, limit) => {
     console.log(long, lat, offset, limit);
