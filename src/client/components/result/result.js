@@ -1,9 +1,7 @@
-import React, {Fragment} from "react";
-import React, {useState} from "react";
+import React, {Fragment, useState} from "react";
 import MapCtnr from "./map";
 import TerminalCtnr from "./terminal-ctnr/terminal-ctnr";
 import {Container} from "@material-ui/core";
-import Search from "./search";
 import Description from "./description";
 
 export default function result() {
@@ -35,12 +33,6 @@ export default function result() {
 
     return (
         <Fragment>
-            <MapCtnr latitude={50.6412} longitude={5.5718} zoom={13} />
-            <Container className={"container content-container"}>
-                <TerminalCtnr />
-            </Container>
-        </Fragment>
-        <div>
             {Handleposition() /*call to take the actual position*/}
             <MapCtnr
                 latitude={posLatitude}
@@ -51,9 +43,10 @@ export default function result() {
                 onitemLongitude={itemLongitude}
                 obj={itemObj}
             />
-            <Search />
-            <TerminalCtnr setDesc={setItemDesc} />
-            <Description obj={itemObj} />
-        </div>
+            <Container className={"container content-container"}>
+                <TerminalCtnr setDesc={setItemDesc} />
+                <Description obj={itemObj} />
+            </Container>
+        </Fragment>
     );
 }
