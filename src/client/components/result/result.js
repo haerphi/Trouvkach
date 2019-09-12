@@ -1,14 +1,15 @@
-import React from "react";
+import React, {Fragment} from "react";
 import MapCtnr from "./map";
 import TerminalCtnr from "./terminal-ctnr/terminal-ctnr";
-import Search from "./search";
+import {Container} from "@material-ui/core";
 
 export default function result() {
     return (
-        <div>
+        <Fragment>
             <MapCtnr latitude={50.6412} longitude={5.5718} zoom={13} />
-            <Search />
-            <TerminalCtnr />
-        </div>
+            <Container className={"container content-container"}>
+                <TerminalCtnr />
+            </Container>
+        </Fragment>
     );
 }
