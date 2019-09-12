@@ -14,6 +14,7 @@ export default function result() {
     const [itemObj, setItemObj] = useState({});
 
     const Handleposition = () => {
+        // va rechercher la poisiton en async
         navigator.geolocation.getCurrentPosition(
             position => {
                 setposLatitude(position.coords.latitude);
@@ -33,6 +34,7 @@ export default function result() {
 
     return (
         <Fragment>
+            {console.log("Rendu result")}
             {Handleposition() /*call to take the actual position*/}
             <MapCtnr
                 latitude={posLatitude}
@@ -44,7 +46,11 @@ export default function result() {
                 obj={itemObj}
             />
             <Container className={"container content-container"}>
-                <TerminalCtnr setDesc={setItemDesc} />
+                <TerminalCtnr
+                    setDesc={setItemDesc}
+                    latitude={posLatitude}
+                    longitude={posLongitude}
+                />
                 <Description obj={itemObj} />
             </Container>
         </Fragment>
