@@ -43,6 +43,7 @@ export const verify = async () => {
     client.close();
 };
 
+//forget this one
 export const mongoRequest = async (long, lat, offset, limit) => {
     console.log(long, lat, offset, limit);
     const client = await mongo.connect(url, {
@@ -90,6 +91,11 @@ export const mongoRequestZoom = async (long, lat, dist) => {
             },
         ])
         .toArray();
+
+    //methode 1 : récupérer toutes les banques dans un tableau et puis les attribués avec une boucle et une fonction "find" (con : utilisation de mémoire | pro : une seule requête)
+
+    //methode 2 : faire une requête pour chaque résultat selon l'id_bank de l'item ( con: beaucoup de requête | pro: sauvegarde de mémoire)
+
     console.log(items);
 
     client.close();
