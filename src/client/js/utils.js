@@ -1,3 +1,34 @@
+const getUnlnownAdressFromNominatim = async (lat, lon, id) => {
+    console.log(`nominatime => lat:${lat} lon:${lon} `);
+    const response = await fetch(
+        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`,
+        {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            method: "GET",
+        },
+    );
+    const data = await response.json();
+    console.log("getUnlnownAdressFromNominatim");
+    const address = `
+    ${data.address.address29 ? data.address.address29 : ""} ${
+        data.address.mall ? data.address.mall : ""
+    }
+    ${data.address.house_number ? data.address.house_number : ""} ${
+        data.address.road ? data.address.road : ""
+    }
+    ${data.address.postcode ? data.address.postcode : ""} ${
+        data.address.city ? data.address.city : ""
+    }
+    
+    ${data.address.country ? data.address.country : ""}
+    `;
+    // eslint-disable-next-line unicorn/prefer-query-selector
+    document.getElementById(`${id}`).innerHTML = address;
+};
+
 //fonction pour récup les banques /api/search/banks/
 const getBanks = async () => {
     const response = await fetch(`/api/search/banks/`, {
@@ -49,13 +80,20 @@ exports.getTerminalAsync = async (long, lat, zoom) => {
     });
     const data = await response.json();
 
-    //rajout des banks à l'emplacement nécessaire
+    //rajout des banks à l'emplacement nécessaire et des adresses manquante
     for (let i = 0; i < data.truc.length; i++) {
         //transformation en map où l'on met l'_id en avant et puis on recherche avec indexOf
         const index = allbanks.map(e => e._id).indexOf(data.truc[i].bank);
         data.truc[i].bank = allbanks[index];
+        //terminal adress verification and fetch
+        if (!data.truc[i].address) {
+            getUnlnownAdressFromNominatim(
+                data.truc[i].latitude,
+                data.truc[i].longitude,
+                data.truc[i]._id,
+            );
+        }
     }
-    console.warn(data);
 
     return data;
 };
