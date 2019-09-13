@@ -4,6 +4,8 @@ import TerminalCtnr from "./terminal-ctnr/terminal-ctnr";
 import {Container} from "@material-ui/core";
 import Description from "./description";
 
+import SearchBar from "./search";
+
 export default function result() {
     const [posLatitude, setposLatitude] = useState(10.6415);
     const [posLongitude, setposLongitude] = useState(20.5721);
@@ -34,24 +36,36 @@ export default function result() {
 
     return (
         <Fragment>
-            {console.log("Rendu result")}
-            {Handleposition() /*call to take the actual position*/}
-            <MapCtnr
-                latitude={posLatitude}
-                longitude={posLongitude}
-                zoom={11}
-                onposition={Handleposition}
-                onitemLatitude={itemLatitude}
-                onitemLongitude={itemLongitude}
-                obj={itemObj}
-            />
-            <Container className={"container content-container"}>
+            <Container max-width={"lg"}>
+                <SearchBar />
+            </Container>
+
+            <Container
+                maxWidth={"lg"}
+                className={"container content-container"}>
+                <div className={"box-wrapper show"}>
+                    {Handleposition() /*call to take the actual position*/}
+                    <div className={"box"}>
+                        <MapCtnr
+                            latitude={posLatitude}
+                            longitude={posLongitude}
+                            zoom={11}
+                            onposition={Handleposition}
+                            onitemLatitude={itemLatitude}
+                            onitemLongitude={itemLongitude}
+                            obj={itemObj}
+                        />
+                        <Description obj={itemObj} />
+                    </div>
+                </div>
+            </Container>
+
+            <Container maxWidth={"lg"} className={"results-items-box"}>
                 <TerminalCtnr
                     setDesc={setItemDesc}
                     latitude={posLatitude}
                     longitude={posLongitude}
                 />
-                <Description obj={itemObj} />
             </Container>
         </Fragment>
     );
