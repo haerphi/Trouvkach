@@ -54,11 +54,31 @@
             padding: 0.5rem 1rem;
             margin: 0;
             color: inherit;
+            font-size: 1rem;
             vertical-align: middle;
             background-color: transparent;
             cursor: pointer;
             transition: background-color 150ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
             @extend .no-select;
+            &.item-name {
+                display: inline-block;
+                width: calc(40% - 1rem);
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+            &.item-distance {
+                display: inline-block;
+                width: calc(40% - 1rem);
+                color: rgba(0, 0, 0, 0.47);
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+            }
+        }
+        &.active {
+            background-color: #26a69a;
+            color: #fff;
         }
     }
 }
