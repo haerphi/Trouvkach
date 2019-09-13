@@ -8,6 +8,7 @@ const getBanks = async () => {
         method: "POST",
     });
     const data = await response.json();
+    console.log("get bank!");
 
     return data.truc;
 };
@@ -30,6 +31,7 @@ const stringToArrayObject = str => {
 };
 
 exports.getTerminalAsync = async (long, lat, zoom) => {
+    localStorage.clear();
     let allbanks = localStorage.getItem("allbanks");
     if (allbanks === null) {
         allbanks = await getBanks();
@@ -51,8 +53,9 @@ exports.getTerminalAsync = async (long, lat, zoom) => {
     for (let i = 0; i < data.truc.length; i++) {
         //transformation en map où l'on met l'_id en avant et puis on recherche avec indexOf
         const index = allbanks.map(e => e._id).indexOf(data.truc[i].bank);
-
         data.truc[i].bank = allbanks[index];
     }
+    console.warn(data);
+
     return data;
 };
