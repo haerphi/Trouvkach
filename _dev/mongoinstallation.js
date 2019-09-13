@@ -1,5 +1,5 @@
 const mongo = require("mongodb").MongoClient;
-const url = "mongodb://dev:dev@mongo:27017";
+const url = "mongodb://dev:dev@localhost:27017";
 
 const updateBD = async () => {
     console.log("UPDATE de la BD");
