@@ -15,7 +15,10 @@
     "work:client": "npx webpack --env=dev --progress",
     "build": "npm run build:server && npm run build:client",
     "dev:server": "npm run build && docker-compose build && docker-compose up",
-    "mongo:install": "npm run mongo:import:banks && npm run mongo:import:terminals && node ./_dev/mongoinstallation.js"
+    "mongo:install": "npm run mongo:import:banks && npm run mongo:import:terminals && node ./_dev/mongoinstallation.js",
+    "mongo:verify": "node ./_dev/mongoinstallation.js",
+    "heroku-postbuild": "npm run mongo:verify && npm run build",
+    "start": "node bin/server/index.js"
   },
   "lint-staged": {
     "*.js": [
