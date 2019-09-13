@@ -21,10 +21,9 @@ export default function viewTerminal(props) {
             <li id={props.obj._id} className={"item-property item-distance"}>
                 {props.obj.address ? props.obj.address : `Unknow Address`}
             </li>
-            <li
-                className={
-                    "item-property item-distance"
-                }>{`distance : ${Math.trunc(props.obj.dist.calculated)}m`}</li>
+            <li className={"item-property item-distance"}>
+                {`distance : ${Math.trunc(props.obj.dist.calculated)}m`}
+            </li>
             {console.log("Rendu terminal item")}
         </ButtonBase>
     );
