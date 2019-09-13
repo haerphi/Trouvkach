@@ -13,9 +13,11 @@ export default function viewTerminal(props) {
             className={"results-list-item"}
             style={{display: "block"}}
             onClick={setdesc}>
-            <li>{/*props.obj.bank.name*/}</li>
-            <li>{props.obj.address}</li>
-            <li>{`distance : ${props.obj.dist.calculated}m`}</li>
+            <li>{props.obj.bank ? props.obj.bank.name : `Unknow Bank`}</li>
+            <li id={props.obj._id}>
+                {props.obj.address ? props.obj.address : `Unknow Address`}
+            </li>
+            <li>{`distance : ${Math.trunc(props.obj.dist.calculated)}m`}</li>
             {console.log("Rendu terminal item")}
         </ButtonBase>
     );

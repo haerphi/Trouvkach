@@ -14,7 +14,8 @@
     "build:client": "npx webpack --progress --profile --colors",
     "work:client": "npx webpack --env=dev --progress",
     "build": "npm run build:server && npm run build:client",
-    "dev:server": "npm run build && docker-compose build && docker-compose up"
+    "dev:server": "npm run build && docker-compose build && docker-compose up",
+    "ultimate": "npm run build && docker-compose up mongo && npm run mongo:import:banks && npm run mongo:import:terminals && docker-compose up"
   },
   "lint-staged": {
     "*.js": [
