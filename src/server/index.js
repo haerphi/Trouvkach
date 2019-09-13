@@ -9,15 +9,12 @@
 import express from "express";
 import path from "path";
 import {
-    verify,
     mongoRequest,
     mongoRequestZoom,
     mongoRequestBanks,
 } from "./mongofunctions";
 
 const {APP_PORT} = process.env;
-
-verify();
 
 const app = express();
 
