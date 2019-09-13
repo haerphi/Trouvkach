@@ -1,5 +1,6 @@
 const mongo = require("mongodb").MongoClient;
-const url = "mongodb://dev:dev@mongo:27017";
+//A MODIFIER
+const url = `mongodb+srv://dev:dev@haerphi-trouvkash-jyzbr.mongodb.net/test?retryWrites=true&w=majority`;
 
 export const mongoRequestBanks = async () => {
     const client = await mongo.connect(url, {
