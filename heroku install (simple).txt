@@ -1,0 +1,6 @@
+- Create a account on Heroku
+- Create a project
+- Link the git repertory
+- scroll to deploy manualy
+- keep an eye on log if there is an error (it could take a moment)
+- the last log should give you a link to the app
