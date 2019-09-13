@@ -16,11 +16,19 @@ export default function TerminalItem(props) {
         // pour une fonction async dans un use effect, on appel une fonction qui appel une fonction asynchrone auto appelée soit useEffect(()=>{(async()=>{await something})()});
         // pour que babel ne soit pas faché par l'async/await, il faut inclure @babel/polyfill a la racine du projet dans le premier component
         (async () => {
-            const data = await utils.getTerminalAsync(2.89, 51.2159, 1000);
-            let listKey = 0; // id for react list key
+            console.log("terminalctnr useEffect render => ");
+            console.log(`props passed => ${props.latitude} ${props.longitude}`);
+            const data = await utils.getTerminalAsync(
+                props.longitude,
+                props.latitude,
+                1000,
+            ); // lat log km
+            console.log(`BDD fetched, result =>`);
+            console.log(data);
+
             const dataArr = data.truc.map(item => (
                 <ViewTerminal
-                    key={++listKey}
+                    key={item._id}
                     view={item.address}
                     obj={item}
                     setdescription={props.setDesc}
@@ -28,7 +36,12 @@ export default function TerminalItem(props) {
             ));
             setTerminal(dataArr);
         })();
-    }, []); // pour l'explication du tableau, voir plus haut ^^
+    }, [props.latitude, props.longitude]); // pour l'explication du tableau, voir plus haut ^^
 
-    return <div className={"results-items-container"}>{terminal}</div>;
+    return (
+        <div className={"results-items-container"}>
+            {terminal}
+            {console.log("Rendu terminal-ctnr")}
+        </div>
+    );
 }
