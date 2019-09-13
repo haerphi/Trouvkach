@@ -14,6 +14,7 @@ export default function mapCtnr(props) {
 
     return (
         <Map
+            id={"leaflet-map"}
             center={[lat, lng]}
             zoom={zoom}
             style={{
