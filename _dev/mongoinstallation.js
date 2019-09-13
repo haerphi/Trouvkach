@@ -1,5 +1,6 @@
 const mongo = require("mongodb").MongoClient;
-const url = "mongodb://dev:dev@localhost:27017";
+//A MODIFIER
+const url = `mongodb+srv://dev:dev@haerphi-trouvkash-jyzbr.mongodb.net/test?retryWrites=true&w=majority`;
 
 const updateBD = async () => {
     console.log("UPDATE de la BD");
