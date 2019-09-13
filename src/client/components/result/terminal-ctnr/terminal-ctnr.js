@@ -26,10 +26,9 @@ export default function TerminalItem(props) {
             console.log(`BDD fetched, result =>`);
             console.log(data);
 
-            let listKey = 0; // id for react list key
             const dataArr = data.truc.map(item => (
                 <ViewTerminal
-                    key={++listKey}
+                    key={item._id}
                     view={item.address}
                     obj={item}
                     setdescription={props.setDesc}
