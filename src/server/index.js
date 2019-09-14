@@ -9,15 +9,18 @@
 import express from "express";
 import path from "path";
 import {
-    verify,
     mongoRequest,
     mongoRequestZoom,
     mongoRequestBanks,
 } from "./mongofunctions";
 
+//fonctionne avec docker-compose up
 const {APP_PORT} = process.env;
-
-verify();
+let port = APP_PORT;
+//devient undefined une fois déployer sur heroku
+if (typeof port === "undefined") {
+    port = process.env.PORT;
+}
 
 const app = express();
 
@@ -149,6 +152,4 @@ app.post("/api/search/banks/", (req, res) => {
     });
 });
 
-app.listen(APP_PORT, () =>
-    console.log(`🚀 Server is listening on port ${APP_PORT}.`),
-);
+app.listen(port, () => console.log(`🚀 Server is listening on port ${port}.`));
