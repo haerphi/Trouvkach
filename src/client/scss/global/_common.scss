@@ -26,7 +26,21 @@
 }
 
 // LOAD FONTS
-// NO FONTS FOR NOW.
+@font-face {
+    font-family: "ConcertOne-Regular";
+    src: url("./fonts/Concert_One/ConcertOne-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Roboto-Regular";
+    src: url("./fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 
 html {
     position: relative;
@@ -42,6 +56,7 @@ body {
     margin-top: 64px;
     padding: 0;
     font-size: 1rem;
+    font-family: "Roboto-Regular";
     background-color: rgba(245, 245, 245, 1);
     color: rgba(0, 0, 0, 0.87);
 }
@@ -95,6 +110,10 @@ img {
     -o-transition: none !important;
     -ms-transition: none !important;
     transition: none !important;
+}
+
+.clearfix {
+    @include clearfix(false);
 }
 
 .break-long-words {
