@@ -15,6 +15,7 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         flexGrow: 1,
+        fontFamily: "ConcertOne-Regular",
         [theme.breakpoints.up(767)]: {
             display: "block",
         },
@@ -31,7 +32,7 @@ export default function SearchAppBar() {
         <AppBar id={"header"} position={"fixed"} className={classes.root}>
             <Container maxWidth={"lg"}>
                 <Toolbar style={{padding: "0"}}>
-                    <Typography className={classes.title} variant={"h6"} noWrap>
+                    <Typography className={classes.title} variant={"h5"} noWrap>
                         {"Trouvkach"}
                     </Typography>
                 </Toolbar>
