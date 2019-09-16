@@ -43,7 +43,8 @@ export default function result() {
             <Container
                 maxWidth={"lg"}
                 className={"container content-container"}>
-                <div className={"box-wrapper show"}>
+                <div className={"box-wrapper"}>
+                    <div className={"box-modal-close-button"}>{"\u00D7"}</div>
                     {Handleposition() /*call to take the actual position*/}
                     <div className={"box"}>
                         <MapCtnr
