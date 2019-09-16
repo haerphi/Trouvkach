@@ -1,4 +1,6 @@
 const mongo = require("mongodb").MongoClient;
+const ObjectId = require("mongodb").ObjectID;
+
 //A MODIFIER
 // const url = `mongodb+srv://dev:dev@haerphi-trouvkash-jyzbr.mongodb.net/test?retryWrites=true&w=majority`;
 const url = "mongodb://dev:dev@mongo:27017";
@@ -17,31 +19,6 @@ export const mongoRequestBanks = async () => {
 
     const rep = {
         truc: banks,
-    };
-    return rep;
-};
-
-//forget this one
-export const mongoRequest = async (long, lat, offset, limit) => {
-    console.log(long, lat, offset, limit);
-    const client = await mongo.connect(url, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
-    const db = client.db("trouvkash");
-    const collection = db.collection("terminals");
-
-    const items = await collection
-        .find({})
-        .skip(parseInt(offset))
-        .limit(parseInt(limit))
-        .toArray();
-    console.log(items);
-
-    client.close();
-
-    const rep = {
-        truc: items,
     };
     return rep;
 };
@@ -70,16 +47,34 @@ export const mongoRequestZoom = async (long, lat, dist) => {
         ])
         .toArray();
 
-    //methode 1 : récupérer toutes les banques dans un tableau et puis les attribués avec une boucle et une fonction "find" (con : utilisation de mémoire | pro : une seule requête)
-
-    //methode 2 : faire une requête pour chaque résultat selon l'id_bank de l'item ( con: beaucoup de requête | pro: sauvegarde de mémoire)
-
     console.log(items);
 
     client.close();
 
     const rep = {
         truc: items,
+    };
+    return rep;
+};
+
+export const mongomodify = async (id, champ, value) => {
+    console.log(`Modify : ${id} -> ${champ} = ${value}`);
+
+    const client = await mongo.connect(url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+    const db = client.db("trouvkash");
+    const collection = db.collection("terminals");
+
+    const modify = {};
+    modify[champ] = value;
+    console.log(modify);
+
+    collection.updateOne({_id: ObjectId(id)}, {$set: modify});
+
+    const rep = {
+        truc: "Modification effectuée (enfin peux-être)",
     };
     return rep;
 };
