@@ -1,7 +1,7 @@
 const mongo = require("mongodb").MongoClient;
 //A MODIFIER
-const url = `mongodb+srv://dev:dev@haerphi-trouvkash-jyzbr.mongodb.net/test?retryWrites=true&w=majority`;
-
+// const url = `mongodb+srv://dev:dev@haerphi-trouvkash-jyzbr.mongodb.net/test?retryWrites=true&w=majority`;
+const url = "mongodb://dev:dev@mongo:27017";
 export const mongoRequestBanks = async () => {
     const client = await mongo.connect(url, {
         useNewUrlParser: true,

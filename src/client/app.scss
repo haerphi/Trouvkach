@@ -1,4 +1,6 @@
 @import "./scss/global/normalize";
+@import "./scss/helpers/mixins";
+@import "./scss/helpers/placeholders";
 @import "./scss/global/common";
 @import "./scss/layout/header";
 @import "./scss/pages/index";
