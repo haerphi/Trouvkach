@@ -2,6 +2,12 @@
     min-height: 100%;
 }
 
+.box-wrapper {
+    .box-modal-close-button {
+        display: none;
+    }
+}
+
 .container.content-container {
     position: relative;
 }
@@ -35,7 +41,8 @@
         position: relative;
         padding-top: 1rem;
         padding-bottom: 1rem;
-        transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0s, color 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+        transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+            color 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0s;
 
         &:last-of-type {
             margin-bottom: 8vmin;

@@ -32,6 +32,28 @@
             overflow-y: auto;
             z-index: 9999999;
 
+            .box-modal-close-button {
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding: 16px;
+                cursor: pointer;
+                color: rgba(#fff, 0.7);
+                font-size: calc(2rem + 2vmin);
+                -webkit-touch-callout: none !important;
+                -webkit-user-select: none !important;
+                -khtml-user-select: none !important;
+                -moz-user-select: none !important;
+                -o-user-select: none !important;
+                -ms-user-select: none !important;
+                user-select: none !important;
+
+                &:hover {
+                    color: rgba(#fff, 1);
+                }
+            }
+
             #leaflet-map,
             .item-description-container {
                 display: inherit !important;
@@ -41,7 +63,7 @@
                 position: absolute;
                 display: inline-block;
                 width: 75%;
-                height: 50%;
+                height: 75%;
                 top: calc(50% - 15vmin);
                 left: 50%;
                 margin: 15vmin 0;
@@ -68,7 +90,7 @@
         }
 
         #leaflet-map {
-            height: calc(10vmin + 10rem) !important;
+            height: calc(25vmin + 10rem) !important;
         }
     }
 

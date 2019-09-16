@@ -51,6 +51,18 @@ const stringToArrayObject = str => {
     return newArr;
 };
 
+// eslint-disable-next-line no-unused-vars
+const updateTerminalAsync = (id, champ, value) => {
+    const uri = `http://localhost/api/modify/${id}/${champ}/${value}`;
+    fetch(uri, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        method: "POST",
+    });
+};
+
 exports.getTerminalAsync = async (long, lat, zoom) => {
     localStorage.clear();
     let allbanks = localStorage.getItem("allbanks");
@@ -81,7 +93,13 @@ exports.getTerminalAsync = async (long, lat, zoom) => {
                 data.truc[i].latitude,
                 data.truc[i].longitude,
                 data.truc[i]._id,
-            );
+            ).then(() => {
+                // updateTerminalAsync(
+                //     data.truc[i]._id,
+                //     "address",
+                //     data.truc[i].address,
+                // );
+            });
         }
     }
 
