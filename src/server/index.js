@@ -62,6 +62,10 @@ app.post("/api/search/banks/", (req, res) => {
     });
 });
 
-app.post("/api/modify/:id/:champ/:value");
+app.post("/api/modify/:id/:champ/:value", req => {
+    console.log(
+        `Modify : ${req.params.id} -> ${req.params.champ} = ${req.params.value}`,
+    );
+});
 
 app.listen(port, () => console.log(`🚀 Server is listening on port ${port}.`));
