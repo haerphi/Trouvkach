@@ -1,9 +1,9 @@
 const mongo = require("mongodb").MongoClient;
 //A MODIFIER
-const url = `mongodb+srv://dev:dev@haerphi-trouvkash-jyzbr.mongodb.net/test?retryWrites=true&w=majority`;
-//const url = "mongodb://dev:dev@localhost:27017";
+const urlRemote = `mongodb+srv://dev:dev@haerphi-trouvkash-jyzbr.mongodb.net/test?retryWrites=true&w=majority`;
+const urlLocal = "mongodb://dev:dev@localhost:27017";
 
-const updateBD = async () => {
+const updateBD = async url => {
     console.log("UPDATE de la BD");
     const client = await mongo.connect(url, {
         useNewUrlParser: true,
@@ -26,7 +26,7 @@ const updateBD = async () => {
     client.close();
 };
 
-const verify = async () => {
+const verify = async url => {
     console.log("VERIFY de la BD");
     const client = await mongo.connect(url, {
         useNewUrlParser: true,
@@ -48,4 +48,35 @@ const verify = async () => {
     client.close();
 };
 
-verify();
+const index = async url => {
+    console.log("index de la BD");
+    const client = await mongo.connect(url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+    console.log("client connected !");
+    const db = client.db("trouvkash");
+    console.log("Db found !");
+    const collection = db.collection("terminals");
+    console.log("collection found !");
+    await collection.createIndex({location: "2dsphere"});
+
+    console.log("connexion closed !");
+    client.close();
+};
+
+const choix = process.argv[2];
+const remoteOrLocal = process.argv[2];
+let uri = urlRemote;
+if (typeof remoteOrLocal != "undefined") {
+    if (remoteOrLocal.toLocaleLowerCase() === "l") {
+        uri = urlLocal;
+    }
+}
+if (typeof choix != "undefined") {
+    if (choix === "index") {
+        index(uri);
+    }
+} else {
+    verify(uri);
+}
