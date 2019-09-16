@@ -9,9 +9,9 @@
 import express from "express";
 import path from "path";
 import {
-    mongoRequest,
     mongoRequestZoom,
     mongoRequestBanks,
+    mongomodify,
 } from "./mongofunctions";
 
 //fonctionne avec docker-compose up
@@ -39,20 +39,6 @@ app.post("/api/search/:longitude/:latitude/:zoom", (req, res) => {
     });
 });
 
-app.post("/api/search/:longitude/:latitude/:offset/:limit", (req, res) => {
-    console.log(`Offset and limit`);
-
-    //requête mongo
-    mongoRequest(
-        req.params.longitude,
-        req.params.latitude,
-        req.params.offset,
-        req.params.limit,
-    ).then(rep => {
-        res.send(rep);
-    });
-});
-
 app.post("/api/search/banks/", (req, res) => {
     console.log(`Banks`);
 
@@ -62,10 +48,10 @@ app.post("/api/search/banks/", (req, res) => {
     });
 });
 
-app.post("/api/modify/:id/:champ/:value", req => {
-    console.log(
-        `Modify : ${req.params.id} -> ${req.params.champ} = ${req.params.value}`,
-    );
+app.post("/api/modify/:id/:champ/:value", (req, res) => {
+    mongomodify(req.params.id, req.params.champ, req.params.value).then(rep => {
+        res.send(rep);
+    });
 });
 
 app.listen(port, () => console.log(`🚀 Server is listening on port ${port}.`));
