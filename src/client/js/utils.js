@@ -51,6 +51,7 @@ const stringToArrayObject = str => {
     return newArr;
 };
 
+// eslint-disable-next-line no-unused-vars
 const updateTerminalAsync = (id, champ, value) => {
     const uri = `http://localhost/api/modify/${id}/${champ}/${value}`;
     fetch(uri, {
@@ -93,11 +94,11 @@ exports.getTerminalAsync = async (long, lat, zoom) => {
                 data.truc[i].longitude,
                 data.truc[i]._id,
             ).then(() => {
-                updateTerminalAsync(
-                    data.truc[i]._id,
-                    "address",
-                    data.truc[i].address,
-                );
+                // updateTerminalAsync(
+                //     data.truc[i]._id,
+                //     "address",
+                //     data.truc[i].address,
+                // );
             });
         }
     }

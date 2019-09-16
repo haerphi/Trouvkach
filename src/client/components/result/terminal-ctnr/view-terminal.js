@@ -32,8 +32,29 @@ export default function viewTerminal(props) {
             className={"results-item"}
             style={{display: "block"}}
             onClick={setdesc}>
-            <li>{props.obj.bank ? props.obj.bank.name : `Unknow Bank`}</li>
-            <li>
+            {/*
+            <li
+                className={"item-property item-name"}
+                style={{color: "#26a69a"}}>
+                {props.obj.bank ? props.obj.bank.name : `Unknow Bank`}
+            </li>
+            <li className={"item-property item-distance"}>
+                {`distance: ${Math.trunc(props.obj.dist.calculated)}m`}
+            </li>
+            <li id={props.obj._id} className={"item-property item-address"}>
+                {props.obj.address ? props.obj.address : `Unknow Address`}
+        
+        
+            */}
+            <li
+                className={"item-property item-name"}
+                style={{color: "#26a69a"}}>
+                {props.obj.bank ? props.obj.bank.name : `Unknow Bank`}
+            </li>
+            <li className={"item-property item-distance"}>
+                {`distance: ${Math.trunc(props.obj.dist.calculated)}m`}
+            </li>
+            <li id={props.obj._id} className={"item-property item-address"}>
                 {typeof address == "string"
                     ? `${address}`
                     : `Address Loading, please wait.`}
