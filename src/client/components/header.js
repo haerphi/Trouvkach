@@ -14,6 +14,7 @@ const useStyles = makeStyles(theme => ({
         marginRight: theme.spacing(2),
     },
     title: {
+        marginTop: "-0.5rem",
         flexGrow: 1,
         fontFamily: "ConcertOne-Regular",
         [theme.breakpoints.up(767)]: {
