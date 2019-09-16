@@ -15,27 +15,40 @@ export default function TerminalItem(props) {
     useEffect(() => {
         // pour une fonction async dans un use effect, on appel une fonction qui appel une fonction asynchrone auto appelée soit useEffect(()=>{(async()=>{await something})()});
         // pour que babel ne soit pas faché par l'async/await, il faut inclure @babel/polyfill a la racine du projet dans le premier component
-        (async () => {
-            console.log("terminalctnr useEffect render => ");
-            console.log(`props passed => ${props.latitude} ${props.longitude}`);
-            const data = await utils.getTerminalAsync(
-                props.longitude,
-                props.latitude,
-                1000,
-            ); // lat log km
-            console.log(`BDD fetched, result =>`);
-            console.log(data);
+        if (
+            props.latitude >= -180 &&
+            props.longitude >= -180 &&
+            props.latitude <= 180 &&
+            props.longitude <= 180
+        ) {
+            (async () => {
+                console.log("terminalctnr useEffect render => ");
+                console.log(
+                    `props passed => ${props.latitude} ${props.longitude}`,
+                );
+                const data = await utils.getTerminalAsync(
+                    props.longitude,
+                    props.latitude,
+                    1000,
+                ); // lat log km
+                console.log(`BDD fetched, result =>`);
+                console.log(data);
 
-            const dataArr = data.truc.map(item => (
-                <ViewTerminal
-                    key={item._id}
-                    view={item.address}
-                    obj={item}
-                    setdescription={props.setDesc}
-                />
-            ));
-            setTerminal(dataArr);
-        })();
+                const dataArr = data.truc.map(item => (
+                    <ViewTerminal
+                        key={item._id}
+                        view={item.address}
+                        obj={item}
+                        setdescription={props.setDesc}
+                    />
+                ));
+                setTerminal(dataArr);
+            })();
+
+            console.log("lat or long ok, fetch api");
+        } else {
+            console.log("lat or long error");
+        }
     }, [props.latitude, props.longitude]); // pour l'explication du tableau, voir plus haut ^^
 
     return (

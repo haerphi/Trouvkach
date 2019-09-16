@@ -7,11 +7,11 @@ import Description from "./description";
 import SearchBar from "./search";
 
 export default function result() {
-    const [posLatitude, setposLatitude] = useState(10.6415);
-    const [posLongitude, setposLongitude] = useState(20.5721);
+    const [posLatitude, setposLatitude] = useState(-181);
+    const [posLongitude, setposLongitude] = useState(-181);
 
-    const [itemLatitude, setItemLatitude] = useState(10.6412);
-    const [itemLongitude, setItemLongitude] = useState(20.5718);
+    const [itemLatitude, setItemLatitude] = useState(-181);
+    const [itemLongitude, setItemLongitude] = useState(-181);
 
     const [itemObj, setItemObj] = useState({});
 
