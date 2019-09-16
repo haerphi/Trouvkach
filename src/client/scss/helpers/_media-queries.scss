@@ -11,7 +11,6 @@
 
 @media screen and (max-width: 767px) {
     .box-wrapper {
-
         #leaflet-map,
         .item-description-container {
             display: none;
@@ -121,7 +120,7 @@
     .results-items-background {
         .results-items-container {
             position: absolute;
-            height: calc(100% - 5vmin);
+            height: 100%;
             width: 100%;
             top: 0;
             right: 0;
