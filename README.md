@@ -2,7 +2,8 @@
 
 <a href="http://becode-trouvkach.herokuapp.com" target="_blank">
  <img src="https://heroku-badge.herokuapp.com/?app=becode-trouvkach" alt="Heroku badge"/>
-</a>
+</a>  
+<br />
 <br />
 
 > A simple react/node app, locating the ATMs nearby.
