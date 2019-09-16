@@ -1,6 +1,7 @@
 const mongo = require("mongodb").MongoClient;
 //A MODIFIER
 const url = `mongodb+srv://dev:dev@haerphi-trouvkash-jyzbr.mongodb.net/test?retryWrites=true&w=majority`;
+//const url = "mongodb://dev:dev@localhost:27017";
 
 const updateBD = async () => {
     console.log("UPDATE de la BD");
@@ -31,9 +32,11 @@ const verify = async () => {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
+    console.log("client connected !");
     const db = client.db("trouvkash");
-
+    console.log("Db found !");
     const collection1 = db.collection("terminals");
+    console.log("collection found !");
     const items = await collection1
         .find({})
         .limit(1)
@@ -41,6 +44,7 @@ const verify = async () => {
     if (!Object.prototype.hasOwnProperty.call(items[0], "location")) {
         updateBD();
     }
+    console.log("connexion closed !");
     client.close();
 };
 

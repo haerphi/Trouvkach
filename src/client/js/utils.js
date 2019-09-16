@@ -1,4 +1,4 @@
-const getUnlnownAdressFromNominatim = async (lat, lon, id) => {
+const getUnlnownAdressFromNominatim = async (lat, lon) => {
     console.log(`nominatime => lat:${lat} lon:${lon} `);
     const response = await fetch(
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`,
@@ -12,21 +12,11 @@ const getUnlnownAdressFromNominatim = async (lat, lon, id) => {
     );
     const data = await response.json();
     console.log("getUnlnownAdressFromNominatim");
-    const address = `
-    ${data.address.address29 ? data.address.address29 : ""} ${
-        data.address.mall ? data.address.mall : ""
-    }
-    ${data.address.house_number ? data.address.house_number : ""} ${
-        data.address.road ? data.address.road : ""
-    }
-    ${data.address.postcode ? data.address.postcode : ""} ${
-        data.address.city ? data.address.city : ""
-    }
-    
-    ${data.address.country ? data.address.country : ""}
-    `;
-    // eslint-disable-next-line unicorn/prefer-query-selector
-    document.getElementById(`${id}`).innerHTML = address;
+    const address = `${data.address.house_number &&
+        data.address.house_number} ${data.address.road &&
+        data.address.road}, ${data.address.postcode &&
+        data.address.postcode} ${data.address.city && data.address.city}`;
+    return address;
 };
 
 //fonction pour récup les banques /api/search/banks/
@@ -61,6 +51,17 @@ const stringToArrayObject = str => {
     return newArr;
 };
 
+const updateTerminalAsync = (id, champ, value) => {
+    const uri = `http://localhost/api/modify/${id}/${champ}/${value}`;
+    fetch(uri, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        method: "POST",
+    });
+};
+
 exports.getTerminalAsync = async (long, lat, zoom) => {
     localStorage.clear();
     let allbanks = localStorage.getItem("allbanks");
@@ -87,11 +88,17 @@ exports.getTerminalAsync = async (long, lat, zoom) => {
         data.truc[i].bank = allbanks[index];
         //terminal adress verification and fetch
         if (!data.truc[i].address) {
-            getUnlnownAdressFromNominatim(
+            data.truc[i].address = getUnlnownAdressFromNominatim(
                 data.truc[i].latitude,
                 data.truc[i].longitude,
                 data.truc[i]._id,
-            );
+            ).then(() => {
+                updateTerminalAsync(
+                    data.truc[i]._id,
+                    "address",
+                    data.truc[i].address,
+                );
+            });
         }
     }
 
