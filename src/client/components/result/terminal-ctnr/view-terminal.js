@@ -4,6 +4,9 @@ import {ButtonBase} from "@material-ui/core";
 
 export default function viewTerminal(props) {
     const setdesc = () => {
+        if (window.innerWidth < 767) {
+            document.querySelector(".box-wrapper").classList.add("show");
+        }
         props.setdescription(props.obj);
         console.log(`obj clicked =>`);
         console.log(props.obj);
