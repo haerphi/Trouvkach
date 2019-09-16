@@ -3,6 +3,7 @@
         margin-top: 56px;
         height: calc(100% - 56px);
     }
+
     .search-input-container {
         top: 10px;
     }
@@ -14,6 +15,7 @@
         .item-description-container {
             display: none;
         }
+
         &.show {
             position: fixed;
             display: block;
@@ -34,6 +36,7 @@
             .item-description-container {
                 display: inherit !important;
             }
+
             .box {
                 position: absolute;
                 display: inline-block;
@@ -53,6 +56,7 @@
                     0px 2px 1px -1px rgba(0, 0, 0, 0.12);
             }
         }
+
         #leaflet-map,
         .item-description-container {
             position: relative !important;
@@ -62,6 +66,7 @@
             padding: 0 16px;
             width: auto;
         }
+
         #leaflet-map {
             height: calc(10vmin + 10rem) !important;
         }
@@ -94,11 +99,12 @@
 @media screen and (min-width: 767px) {
     .box-wrapper {
         position: relative;
-        z-index: -1;
+        z-index: 2;
         margin-top: 50vh;
         width: calc(100% - 30rem);
         margin-left: 30rem;
     }
+
     #leaflet-map {
         position: fixed !important;
         top: 64px;
@@ -106,20 +112,22 @@
         right: 0;
         z-index: 999999999;
     }
+
     .search-input-container {
         width: auto;
     }
+
     .results-items-background {
         .results-items-container {
             position: absolute;
-            height: calc(100% - 5vmin);
+            height: 100%;
             width: 100%;
             top: 0;
             right: 0;
             left: 0;
-            padding-top: 5vmin;
             overflow-y: auto;
         }
+
         &::before {
             position: absolute;
             content: "";
@@ -142,6 +150,7 @@
         height: 55vh;
         width: 35vmin;
     }
+
     .box-wrapper {
         width: calc(100% - 40vmin);
         margin-left: 40vmin;
@@ -160,6 +169,7 @@
         right: 32px;
     }
 }
+
 @media screen and(min-width: 767px) and (max-width: 1280px) {
     .results-items-background {
         left: 32px;
