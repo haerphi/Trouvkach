@@ -12,13 +12,10 @@ const getUnlnownAdressFromNominatim = async (lat, lon) => {
     );
     const data = await response.json();
     console.log("getUnlnownAdressFromNominatim");
-    const address = `${data.address.address29 ? data.address.address29 : ""} ${
-        data.address.mall ? data.address.mall : ""
-    }${data.address.house_number ? data.address.house_number : ""} ${
-        data.address.road ? data.address.road : ""
-    } ${data.address.postcode ? data.address.postcode : ""} ${
-        data.address.city ? data.address.city : ""
-    }${data.address.country ? data.address.country : ""}`;
+    const address = `${data.address.house_number &&
+        data.address.house_number} ${data.address.road &&
+        data.address.road}, ${data.address.postcode &&
+        data.address.postcode} ${data.address.city && data.address.city}`;
     return address;
 };
 
