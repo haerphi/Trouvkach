@@ -16,6 +16,9 @@ const getUnlnownAdressFromNominatim = async (lat, lon) => {
             : ""
     } ${data.address.road && data.address.road}, ${data.address.postcode &&
         data.address.postcode} ${data.address.city && data.address.city}`;
+    if (typeof data.address.house_number != "undefined") {
+        console.log(data.address.house_number);
+    }
     return address;
 };
 
@@ -61,7 +64,10 @@ const updateTerminalAsync = (id, champ, value) => {
         method: "POST",
     });
 };
-
+async function miche(addr) {
+    const data = await addr;
+    console.log(data);
+}
 exports.getTerminalAsync = async (long, lat, zoom) => {
     localStorage.clear();
     let allbanks = localStorage.getItem("allbanks");
@@ -93,6 +99,7 @@ exports.getTerminalAsync = async (long, lat, zoom) => {
                 data.truc[i].longitude,
                 data.truc[i]._id,
             );
+            miche(data.truc[i].address);
         }
     }
 
