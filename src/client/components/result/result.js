@@ -4,7 +4,7 @@ import TerminalCtnr from "./terminal-ctnr/terminal-ctnr";
 import {Container} from "@material-ui/core";
 import Description from "./description";
 
-import SearchBar from "./search";
+import SearchBar from "./search/search";
 
 export default function result() {
     const [posLatitude, setposLatitude] = useState(-181);

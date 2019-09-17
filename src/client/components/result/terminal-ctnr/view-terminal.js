@@ -6,11 +6,11 @@ export default function viewTerminal(props) {
     // si je recois une string dans props.obj.adress alors j'ai l'adress. je l'ecris
     // sinon, c'est une promise, je l'insere dans un un state, je fait un useeffect et des que la promise change de pending a quelquechose, j'affiche ce quelquechose via le useeffect ( le state est immutable)
     const [address, setAddress] = useState(props.obj.address);
-
     if (typeof props.obj.address != "string") {
         useEffect(() => {
             (async () => {
-                const adressTemp = await props.obj.address;
+                const adressTemp = await address;
+                console.log(adressTemp);
                 setAddress(adressTemp);
             })();
         }, [props.obj.address]);
@@ -22,8 +22,6 @@ export default function viewTerminal(props) {
         }
         props.obj.address = address;
         props.setdescription(props.obj);
-        console.log(`obj clicked =>`);
-        console.log(props.obj);
     };
 
     return (
@@ -45,7 +43,6 @@ export default function viewTerminal(props) {
                     ? `${address}`
                     : `Address Loading, please wait.`}
             </li>
-            {console.log("Rendu terminal item")}
         </ButtonBase>
     );
 }
