@@ -10,9 +10,11 @@ const getUnlnownAdressFromNominatim = async (lat, lon) => {
         },
     );
     const data = await response.json();
-    const address = `${data.address.house_number &&
-        data.address.house_number} ${data.address.road &&
-        data.address.road}, ${data.address.postcode &&
+    const address = `${
+        typeof data.address.house_number !== "undefined"
+            ? data.address.house_number
+            : ""
+    } ${data.address.road && data.address.road}, ${data.address.postcode &&
         data.address.postcode} ${data.address.city && data.address.city}`;
     return address;
 };

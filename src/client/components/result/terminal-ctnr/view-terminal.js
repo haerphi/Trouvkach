@@ -10,7 +10,6 @@ export default function viewTerminal(props) {
         useEffect(() => {
             (async () => {
                 const adressTemp = await address;
-                console.log(adressTemp);
                 setAddress(adressTemp);
             })();
         }, [props.obj.address]);
