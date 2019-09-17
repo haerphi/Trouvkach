@@ -14,7 +14,6 @@ export const mongoRequestBanks = async () => {
     const collection = db.collection("banks");
 
     const banks = await collection.find({}).toArray();
-    console.log(banks);
 
     client.close();
 
@@ -25,7 +24,6 @@ export const mongoRequestBanks = async () => {
 };
 
 export const mongoRequestZoom = async (long, lat, dist) => {
-    console.log(parseFloat(long), parseFloat(lat), parseInt(dist));
     const client = await mongo.connect(url, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -48,8 +46,6 @@ export const mongoRequestZoom = async (long, lat, dist) => {
         ])
         .toArray();
 
-    console.log(items);
-
     client.close();
 
     const rep = {
@@ -71,7 +67,6 @@ export const mongomodify = async (id, champ, value) => {
     const modify = {};
     modify[champ] = value;
     console.log(modify);
-
     collection.updateOne({_id: ObjectId(id)}, {$set: modify});
 
     const rep = {
