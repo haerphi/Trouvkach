@@ -49,6 +49,7 @@ app.post("/api/search/banks/", (req, res) => {
 });
 
 app.post("/api/modify/:id/:champ/:value", (req, res) => {
+    console.log("Modify");
     mongomodify(req.params.id, req.params.champ, req.params.value).then(rep => {
         res.send(rep);
     });
