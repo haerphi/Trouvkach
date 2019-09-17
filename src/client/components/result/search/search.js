@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import InputBase from "@material-ui/core/InputBase";
 import {makeStyles} from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
+import SearchItem from "./search-item";
 import utils from "./../../../js/utils";
 
 const useStyles = makeStyles(theme => ({
@@ -34,12 +35,34 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function SearchBar() {
+export default function SearchBar(props) {
     const [searchResult, setSearchResult] = useState("");
 
     const debounceValue = [null, ""];
 
     const classes = useStyles();
+
+    const searchFetchAndDisplay = async () => {
+        const searchedData = await utils.getcoordFromNominatim(
+            debounceValue[1],
+        );
+
+        const HandleResetSearch = () => {
+            debounceValue[1] = "";
+            setSearchResult("");
+        };
+
+        const searchResultTemp = searchedData.features.map(item => (
+            <SearchItem
+                key={item.properties.geocoding.place_id}
+                item={item}
+                onPositionChangeByItem={props.onPositionChange}
+                onResetSearch={HandleResetSearch}
+            />
+        ));
+
+        setSearchResult(searchResultTemp);
+    };
 
     const HandleInputsearch = evt => {
         /*debounce function */
@@ -50,25 +73,11 @@ export default function SearchBar() {
 
         if (debounceValue[0] == null) {
             debounceValue[1] = evt.target.value;
-            debounceValue[0] = setTimeout(async () => {
-                const searchedData = await utils.getcoordFromNominatim(
-                    debounceValue[1],
-                );
-
-                setSearchResult(searchedData.features);
-                console.log(searchResult);
-            }, 1000);
+            debounceValue[0] = setTimeout(searchFetchAndDisplay, 1000);
         } else {
             clearTimeout(debounceValue[0]);
             debounceValue[1] = evt.target.value;
-            debounceValue[0] = setTimeout(async () => {
-                const searchedData = await utils.getcoordFromNominatim(
-                    debounceValue[1],
-                );
-
-                setSearchResult(searchedData.features);
-                console.log(searchResult);
-            }, 1000);
+            debounceValue[0] = setTimeout(searchFetchAndDisplay, 1000);
         }
     };
     return (
@@ -86,6 +95,7 @@ export default function SearchBar() {
                 inputProps={{"aria-label": "search"}}
                 onInput={HandleInputsearch}
             />
+            {searchResult}
         </div>
     );
 }

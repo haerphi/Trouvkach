@@ -1,4 +1,4 @@
-import React, {Fragment, useState} from "react";
+import React, {Fragment, useState, useEffect} from "react";
 import MapCtnr from "./map";
 import TerminalCtnr from "./terminal-ctnr/terminal-ctnr";
 import {Container} from "@material-ui/core";
@@ -27,6 +27,16 @@ export default function result() {
         );
     };
 
+    useEffect(() => {
+        Handleposition();
+    }, []);
+
+    const HandleSearchedPosition = NewAdressSearched => {
+        console.log(`new pos`);
+        setposLatitude(NewAdressSearched.geometry.coordinates[1]);
+        setposLongitude(NewAdressSearched.geometry.coordinates[0]);
+    };
+
     const setItemDesc = item => {
         // this will reset the item position and the descritpion
         setItemLatitude(item.latitude);
@@ -37,7 +47,7 @@ export default function result() {
     return (
         <Fragment>
             <Container max-width={"lg"}>
-                <SearchBar />
+                <SearchBar onPositionChange={HandleSearchedPosition} />
             </Container>
 
             <Container
@@ -45,12 +55,11 @@ export default function result() {
                 className={"container content-container"}>
                 <div className={"box-wrapper"}>
                     <div className={"box-modal-close-button"}>{"\u00D7"}</div>
-                    {Handleposition() /*call to take the actual position*/}
                     <div className={"box"}>
                         <MapCtnr
                             latitude={posLatitude}
                             longitude={posLongitude}
-                            zoom={11}
+                            zoom={16}
                             onposition={Handleposition}
                             onitemLatitude={itemLatitude}
                             onitemLongitude={itemLongitude}
