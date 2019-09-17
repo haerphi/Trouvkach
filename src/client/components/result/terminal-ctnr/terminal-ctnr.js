@@ -22,18 +22,11 @@ export default function TerminalItem(props) {
             props.longitude <= 180
         ) {
             (async () => {
-                console.log("terminalctnr useEffect render => ");
-                console.log(
-                    `props passed => ${props.latitude} ${props.longitude}`,
-                );
                 const data = await utils.getTerminalAsync(
                     props.longitude,
                     props.latitude,
                     1000,
                 ); // lat log km
-                console.log(`BDD fetched, result =>`);
-                console.log(data);
-
                 const dataArr = data.truc.map(item => (
                     <ViewTerminal
                         key={item._id}
@@ -44,10 +37,6 @@ export default function TerminalItem(props) {
                 ));
                 setTerminal(dataArr);
             })();
-
-            console.log("lat or long ok, fetch api");
-        } else {
-            console.log("lat or long error");
         }
     }, [props.latitude, props.longitude]); // pour l'explication du tableau, voir plus haut ^^
 

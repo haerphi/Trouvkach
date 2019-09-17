@@ -1,5 +1,4 @@
 const getUnlnownAdressFromNominatim = async (lat, lon) => {
-    console.log(`nominatime => lat:${lat} lon:${lon} `);
     const response = await fetch(
         `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lon}`,
         {
@@ -11,7 +10,6 @@ const getUnlnownAdressFromNominatim = async (lat, lon) => {
         },
     );
     const data = await response.json();
-    console.log("getUnlnownAdressFromNominatim");
     const address = `${data.address.house_number &&
         data.address.house_number} ${data.address.road &&
         data.address.road}, ${data.address.postcode &&
@@ -29,7 +27,6 @@ const getBanks = async () => {
         method: "POST",
     });
     const data = await response.json();
-    console.log("get bank!");
 
     return data.truc;
 };
@@ -93,13 +90,7 @@ exports.getTerminalAsync = async (long, lat, zoom) => {
                 data.truc[i].latitude,
                 data.truc[i].longitude,
                 data.truc[i]._id,
-            ).then(() => {
-                // updateTerminalAsync(
-                //     data.truc[i]._id,
-                //     "address",
-                //     data.truc[i].address,
-                // );
-            });
+            );
         }
     }
 
