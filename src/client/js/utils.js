@@ -19,6 +19,21 @@ const getUnlnownAdressFromNominatim = async (lat, lon) => {
     return address;
 };
 
+exports.getcoordFromNominatim = async search => {
+    const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?q=${search}&format=geocodejson`,
+        {
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            method: "GET",
+        },
+    );
+    const data = await response.json();
+    return data;
+};
+
 //fonction pour récup les banques /api/search/banks/
 const getBanks = async () => {
     const response = await fetch(`/api/search/banks/`, {

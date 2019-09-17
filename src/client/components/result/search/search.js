@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import InputBase from "@material-ui/core/InputBase";
 import {makeStyles} from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
+import utils from "./../../../js/utils";
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -34,8 +35,42 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function SearchBar() {
+    const [searchResult, setSearchResult] = useState("");
+
+    const debounceValue = [null, ""];
+
     const classes = useStyles();
 
+    const HandleInputsearch = evt => {
+        /*debounce function */
+        // on recupere l'evenement touche appuyée.
+        // si il y a deja un timeout dans debounceValue[0], on le clear et on en remet un et on remplace la valeur de debounceValue[1] par evt.target.value
+        // si il n'y en as pas, on en met un et on remplace la valeur de debounceValue[1] par evt.target.value
+        // quand setTimeOut arrive a 0, on labnce le fetch
+
+        if (debounceValue[0] == null) {
+            debounceValue[1] = evt.target.value;
+            debounceValue[0] = setTimeout(async () => {
+                const searchedData = await utils.getcoordFromNominatim(
+                    debounceValue[1],
+                );
+
+                setSearchResult(searchedData.features);
+                console.log(searchResult);
+            }, 1000);
+        } else {
+            clearTimeout(debounceValue[0]);
+            debounceValue[1] = evt.target.value;
+            debounceValue[0] = setTimeout(async () => {
+                const searchedData = await utils.getcoordFromNominatim(
+                    debounceValue[1],
+                );
+
+                setSearchResult(searchedData.features);
+                console.log(searchResult);
+            }, 1000);
+        }
+    };
     return (
         <div className={"search-input-container"}>
             <div className={classes.searchIcon}>
@@ -49,6 +84,7 @@ export default function SearchBar() {
                 }}
                 className={"search-input no-select"}
                 inputProps={{"aria-label": "search"}}
+                onInput={HandleInputsearch}
             />
         </div>
     );
