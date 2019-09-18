@@ -30,7 +30,7 @@
         display: none;
     }
 
-    .Mui-focused ~ .search-results {
+    &:hover .search-results {
         display: block;
         position: absolute;
         top: 100%;
