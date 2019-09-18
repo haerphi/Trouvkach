@@ -22,13 +22,15 @@ export default function Description(props) {
                         `${Math.trunc(props.obj.dist.calculated)} m`}
                 </div>
 
-                <div className={"description-buttons"}>
-                    <Fragment>
-                        <p>{"Terminal actions:"}</p>
-                        <DescriptionButtons obj={props.obj} />
-                        {/* REPLACE WITH props.obj.status or bank.status */}
-                    </Fragment>
-                </div>
+                {props.obj.bank && (
+                    <div className={"description-buttons"}>
+                        <Fragment>
+                            <p>{"Terminal actions:"}</p>
+                            <DescriptionButtons obj={props.obj} />
+                            {/* REPLACE WITH props.obj.status or bank.status */}
+                        </Fragment>
+                    </div>
+                )}
             </Paper>
         </div>
     );

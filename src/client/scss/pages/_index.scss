@@ -25,6 +25,48 @@
     &:hover {
         background-color: rgba(0, 0, 0, 0.25);
     }
+
+    .search-results {
+        display: none;
+    }
+
+    .Mui-focused ~ .search-results {
+        display: block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: auto;
+        max-height: 50vmin;
+        overflow-y: auto;
+        background-color: #f5f5f5;
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+            0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+            0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+
+        .search-result {
+            cursor: pointer;
+            padding: 0.65rem 0.35rem;
+            color: rgba(0, 0, 0, 0.85);
+            font-size: 0.875rem;
+            background-color: #fff;
+            transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0s,
+                color 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0s;
+            &.active,
+            &:hover {
+                background-color: darken(#26a69a, 7);
+                color: #fff !important;
+
+                li {
+                    color: #fff !important;
+                }
+            }
+            &:not(:last-of-type) {
+                border-bottom: 3px solid #f5f5f5;
+            }
+        }
+    }
 }
 
 .results-items-background {
@@ -35,12 +77,12 @@
     width: 25rem;
     height: 50vh;
     background-color: #fff;
-    border-right: 1px solid rgba(0, 0, 0, 0.12);
+    border-right: 1.5px solid rgba(0, 0, 0, 0.12);
 
     .results-item {
         position: relative;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
         transition: background-color 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0s,
             color 0.25s cubic-bezier(0.4, 0, 0.2, 1) 0s;
 

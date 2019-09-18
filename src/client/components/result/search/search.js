@@ -95,7 +95,7 @@ export default function SearchBar(props) {
                 inputProps={{"aria-label": "search"}}
                 onInput={HandleInputsearch}
             />
-            {searchResult}
+            <ul className={"search-results"}>{searchResult}</ul>
         </div>
     );
 }
