@@ -28,7 +28,14 @@ export default function viewTerminal(props) {
             onClick={setdesc}>
             <li
                 className={"item-property item-name"}
-                style={{color: "#26a69a"}}>
+                style={{
+                    color: `${props.obj.bank &&
+                        `#${
+                            props.obj.bank.color
+                                ? props.obj.bank.color
+                                : "26a69a"
+                        }`}`,
+                }}>
                 {props.obj.bank ? props.obj.bank.name : `Unknow Bank`}
             </li>
             <li className={"item-property item-distance"}>
