@@ -12,17 +12,23 @@ export default function mapCtnr(props) {
     const lng = props.longitude;
     const zoom = props.zoom;
 
+    // action that triggered when the card is zoomed
+    const horatioKayne = evt => {
+        props.onZoom(evt.target._zoom);
+    };
+
     return (
         <Map
             id={"leaflet-map"}
             center={[lat, lng]}
             zoom={zoom}
+            maxZoom={19}
             style={{
                 height: "calc(50vh - 64px)",
                 width: "100%",
             }}
             attributionControl={false}
-            scrollWheelZoom={false}>
+            onZoom={horatioKayne}>
             <TileLayer
                 attribution={
                     '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
