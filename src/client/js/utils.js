@@ -65,7 +65,6 @@ const stringToArrayObject = str => {
     return newArr;
 };
 
-// eslint-disable-next-line no-unused-vars
 const updateTerminalAsync = (id, champ, value) => {
     const uri = `http://localhost/api/modify/${id}/${champ}/${value}`;
     fetch(uri, {
@@ -76,7 +75,11 @@ const updateTerminalAsync = (id, champ, value) => {
         method: "POST",
     });
 };
-
+async function doSomeUpdate(id, addr) {
+    let data = await addr;
+    data = data.replace(/\//g, "%2F");
+    updateTerminalAsync(id, "address", data);
+}
 exports.getTerminalAsync = async (long, lat, zoom) => {
     localStorage.clear();
     let allbanks = localStorage.getItem("allbanks");
@@ -108,6 +111,7 @@ exports.getTerminalAsync = async (long, lat, zoom) => {
                 data.truc[i].longitude,
                 data.truc[i]._id,
             );
+            doSomeUpdate(data.truc[i]._id, data.truc[i].address);
         }
     }
 

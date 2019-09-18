@@ -60,13 +60,14 @@ const index = async url => {
     const collection = db.collection("terminals");
     console.log("collection found !");
     await collection.createIndex({location: "2dsphere"});
+    console.log(`index created for : ${url}`);
 
     console.log("connexion closed !");
     client.close();
 };
 
 const choix = process.argv[2];
-const remoteOrLocal = process.argv[2];
+const remoteOrLocal = process.argv[3];
 let uri = urlRemote;
 if (typeof remoteOrLocal != "undefined") {
     if (remoteOrLocal.toLocaleLowerCase() === "l") {

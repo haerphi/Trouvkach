@@ -14,7 +14,6 @@ export const mongoRequestBanks = async () => {
     const collection = db.collection("banks");
 
     const banks = await collection.find({}).toArray();
-    console.log(banks);
 
     client.close();
 
@@ -25,7 +24,6 @@ export const mongoRequestBanks = async () => {
 };
 
 export const mongoRequestZoom = async (long, lat, dist) => {
-    console.log(parseFloat(long), parseFloat(lat), parseInt(dist));
     const client = await mongo.connect(url, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -48,8 +46,6 @@ export const mongoRequestZoom = async (long, lat, dist) => {
         ])
         .toArray();
 
-    console.log(items);
-
     client.close();
 
     const rep = {
@@ -70,9 +66,44 @@ export const mongomodify = async (id, champ, value) => {
 
     const modify = {};
     modify[champ] = value;
-    console.log(modify);
-
     collection.updateOne({_id: ObjectId(id)}, {$set: modify});
+
+    client.close();
+
+    const rep = {
+        truc: "Modification effectuée (enfin peux-être)",
+    };
+    return rep;
+};
+
+export const newTerminal = async (long, lat, bank) => {
+    const client = await mongo.connect(url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+    });
+    const db = client.db("trouvkash");
+    const collection = db.collection("terminals");
+
+    //insert
+    const newElement = {
+        bank: ObjectId(bank),
+        latitude: parseFloat(lat),
+        longitude: parseFloat(long),
+        address: null, //Will be update by the app
+        created_at: "today", //todo
+        updated_at: "today", //todo
+        deleted_at: null,
+        location: {
+            type: "Point",
+            coordinates: [parseFloat(long), parseFloat(lat)],
+        },
+    };
+    console.log("new ELement : ");
+    console.log(newElement);
+    await collection.insertOne(newElement);
+    await collection.createIndex({location: "2dsphere"});
+
+    client.close();
 
     const rep = {
         truc: "Modification effectuée (enfin peux-être)",
