@@ -7,11 +7,8 @@ export default function searchItem(props) {
     };
 
     return (
-        <div
-            style={{backgroundColor: "white", color: "black"}}
-            onClick={posChange}>
+        <li className={"search-result"} onClick={posChange}>
             {props.item.properties.geocoding.label}
-            <hr />
-        </div>
+        </li>
     );
 }
