@@ -42,6 +42,7 @@ export default function result() {
 
     const [posLatitude, setposLatitude] = useState(-181);
     const [posLongitude, setposLongitude] = useState(-181);
+    const [zoom, setZoom] = useState(16);
 
     const [itemLatitude, setItemLatitude] = useState(-181);
     const [itemLongitude, setItemLongitude] = useState(-181);
@@ -93,11 +94,12 @@ export default function result() {
                         <MapCtnr
                             latitude={posLatitude}
                             longitude={posLongitude}
-                            zoom={16}
+                            zoom={zoom}
                             onposition={Handleposition}
                             onitemLatitude={itemLatitude}
                             onitemLongitude={itemLongitude}
                             obj={itemObj}
+                            onZoom={setZoom}
                         />
                         <Description obj={itemObj} />
                     </div>
@@ -112,6 +114,7 @@ export default function result() {
                     setDesc={setItemDesc}
                     latitude={posLatitude}
                     longitude={posLongitude}
+                    zoom={zoom}
                 />
             </Container>
         </Fragment>
