@@ -25,7 +25,7 @@ export default function Description(props) {
                 <div className={"description-buttons"}>
                     <Fragment>
                         <p>{"Terminal actions:"}</p>
-                        <DescriptionButtons empty={false} />
+                        <DescriptionButtons obj={props.obj} />
                         {/* REPLACE WITH props.obj.status or bank.status */}
                     </Fragment>
                 </div>

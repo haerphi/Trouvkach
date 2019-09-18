@@ -4,6 +4,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import MoneyOffIcon from "@material-ui/icons/MoneyOff"; // EMPTY
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney"; // FILLED
 import DeleteIcon from "@material-ui/icons/Delete"; // DELETE
+import utils from "./../../../js/utils";
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -22,6 +23,13 @@ const useStyles = makeStyles(theme => ({
 
 export default function descriptionButtons(props) {
     const classes = useStyles();
+    const handleMyFunction = () => {
+        console.log(props.obj);
+        utils.updateTerminalStatus(
+            props.obj._id,
+            typeof props.status === "undefined" ? "FILLED" : props.status,
+        );
+    };
 
     return (
         <Fragment>
@@ -35,8 +43,9 @@ export default function descriptionButtons(props) {
             <Button
                 variant={"contained"}
                 color={"primary"}
-                className={classes.button}>
-                {props.empty ? "FILLED" : "EMPTY"}
+                className={classes.button}
+                onClick={handleMyFunction}>
+                {typeof props.status === "undefined" ? "EMPTY" : props.status}
 
                 {props.empty ? (
                     <AttachMoneyIcon className={classes.rightIcon} />
