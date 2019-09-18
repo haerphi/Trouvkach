@@ -17,11 +17,8 @@ export default function viewTerminal(props) {
     }
 
     const setdesc = () => {
-        if (window.innerWidth < 767) {
-            document.querySelector(".box-wrapper").classList.add("show");
-        }
         props.obj.address = address;
-        props.setdescription(props.obj);
+        props.setdescription(props.obj, true);
         console.log(`obj clicked =>`);
         console.log(props.obj);
     };
