@@ -1,5 +1,6 @@
-import React from "react";
+import React, {Fragment} from "react";
 import {Paper, Typography} from "@material-ui/core";
+import DescriptionButtons from "./description-buttons/buttons";
 
 export default function Description(props) {
     return (
@@ -19,6 +20,14 @@ export default function Description(props) {
                 <div>
                     {props.obj.dist &&
                         `${Math.trunc(props.obj.dist.calculated)} m`}
+                </div>
+
+                <div className={"description-buttons"}>
+                    <Fragment>
+                        <p>{"Terminal actions:"}</p>
+                        <DescriptionButtons empty={false} />
+                        {/* REPLACE WITH props.obj.status or bank.status */}
+                    </Fragment>
                 </div>
             </Paper>
         </div>
