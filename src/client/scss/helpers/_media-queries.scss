@@ -1,7 +1,6 @@
 @media screen and (max-width: 600px) {
     body {
         margin-top: 56px;
-        height: calc(100% - 56px);
     }
 
     .search-input-container {
@@ -10,11 +9,16 @@
 }
 
 @media screen and (max-width: 767px) {
+    body {
+        height: auto !important;
+    }
     .box-wrapper {
         #leaflet-map,
         .item-description-container {
             display: none;
         }
+
+        transition: 0.35s background-color ease-in-out;
 
         &.show {
             position: fixed;
@@ -32,9 +36,9 @@
             overflow-y: auto;
             z-index: 9999999;
 
-            .box-modal-close-button {
+            .modal-close-button {
                 display: block;
-                position: absolute;
+                position: fixed;
                 top: 0;
                 right: 0;
                 padding: 16px;
@@ -64,14 +68,14 @@
                 display: inline-block;
                 width: 75%;
                 height: 75%;
-                top: calc(50% - 15vmin);
+                top: calc(50% - 10vmin);
                 left: 50%;
-                margin: 15vmin 0;
+                margin: 10vmin 0;
                 overflow-y: auto;
                 -webkit-transform: translate(-50%, -50%);
                 -ms-transform: translate(-50%, -50%);
                 transform: translate(-50%, -50%);
-                background-color: rgba(245, 245, 245, 1);
+                background-color: #f5f5f5;
                 border-radius: 4px;
                 box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
                     0px 1px 1px 0px rgba(0, 0, 0, 0.14),

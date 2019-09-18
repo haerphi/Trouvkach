@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect} from "react";
+import React, {Fragment, useState, useEffect, useRef} from "react";
 import MapCtnr from "./map";
 import TerminalCtnr from "./terminal-ctnr/terminal-ctnr";
 import {Container} from "@material-ui/core";
@@ -7,6 +7,39 @@ import Description from "./description";
 import SearchBar from "./search/search";
 
 export default function result() {
+    const modalRef = useRef(null);
+    const resultsContainerRef = useRef(null);
+
+    const [showModal, setShowModal] = useState(false);
+
+    function handleClickOutside(event) {
+        if (window.innerWidth <= 767) {
+            if (modalRef.current && resultsContainerRef.current) {
+                if (
+                    !modalRef.current.contains(event.target) &&
+                    !resultsContainerRef.current.contains(event.target)
+                ) {
+                    setShowModal(false);
+                }
+            }
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener("click", handleClickOutside);
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    });
+
+    useEffect(() => {
+        if (showModal) {
+            document.querySelector("body, html").classList.add("no-scroll");
+            return;
+        }
+        document.querySelector("body, html").classList.remove("no-scroll");
+    }, [showModal]);
+
     const [posLatitude, setposLatitude] = useState(-181);
     const [posLongitude, setposLongitude] = useState(-181);
 
@@ -37,11 +70,12 @@ export default function result() {
         setposLongitude(NewAdressSearched.geometry.coordinates[0]);
     };
 
-    const setItemDesc = item => {
+    const setItemDesc = (item, checkForModal) => {
         // this will reset the item position and the descritpion
         setItemLatitude(item.latitude);
         setItemLongitude(item.longitude);
         setItemObj(item);
+        setShowModal(checkForModal);
     };
 
     return (
@@ -53,9 +87,9 @@ export default function result() {
             <Container
                 maxWidth={"lg"}
                 className={"container content-container"}>
-                <div className={"box-wrapper"}>
-                    <div className={"box-modal-close-button"}>{"\u00D7"}</div>
-                    <div className={"box"}>
+                <div className={`box-wrapper ${showModal ? "show" : ""}`}>
+                    <div className={"modal-close-button"}>{"\u00D7"}</div>
+                    <div ref={modalRef} className={"box"}>
                         <MapCtnr
                             latitude={posLatitude}
                             longitude={posLongitude}
@@ -70,7 +104,10 @@ export default function result() {
                 </div>
             </Container>
 
-            <Container maxWidth={"lg"} className={"results-items-box"}>
+            <Container
+                ref={resultsContainerRef}
+                maxWidth={"lg"}
+                className={"results-items-box"}>
                 <TerminalCtnr
                     setDesc={setItemDesc}
                     latitude={posLatitude}

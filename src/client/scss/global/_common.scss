@@ -40,8 +40,6 @@
     font-style: normal;
 }
 
-
-
 html {
     position: relative;
     height: 100%;
@@ -101,7 +99,7 @@ img {
 }
 
 .no-scroll {
-    overflow: hidden;
+    overflow: hidden !important;
 }
 
 .no-transition {
