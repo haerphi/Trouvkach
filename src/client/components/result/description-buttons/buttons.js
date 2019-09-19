@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function descriptionButtons(props) {
     const classes = useStyles();
+    console.log(`empty value in button :${props.emptyValue}`);
     return (
         <Fragment>
             <Button
@@ -36,8 +37,8 @@ export default function descriptionButtons(props) {
                 color={"primary"}
                 className={classes.button}
                 onClick={props.handleEmpty}>
-                {props.empty ? "fulled" : "empty"}
-                {props.empty ? (
+                {props.emptyValue ? "fulled" : "empty"}
+                {props.emptyValue ? (
                     <AttachMoneyIcon className={classes.rightIcon} />
                 ) : (
                     <MoneyOffIcon className={classes.rightIcon} />

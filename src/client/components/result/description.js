@@ -8,8 +8,6 @@ export default function Description(props) {
 
     useEffect(() => {
         setEmpty(props.obj.empty);
-        props.obj.empty &&
-            utils.updateTerminal(props.obj._id, "empty", props.obj.empty);
     }, [props.obj.empty]);
 
     const handleChangeEmpty = () => {
@@ -19,6 +17,7 @@ export default function Description(props) {
             props.obj.empty = true;
         }
         setEmpty(props.obj.empty);
+        utils.updateTerminal(props.obj._id, "empty", props.obj.empty);
     };
 
     return (
@@ -47,8 +46,9 @@ export default function Description(props) {
                     <div className={"description-buttons"}>
                         <Fragment>
                             <p>{"Terminal actions:"}</p>
+                            <p>{"delete is not implement"}</p>
                             <DescriptionButtons
-                                empty={empty}
+                                emptyValue={empty}
                                 handleEmpty={handleChangeEmpty}
                             />
                             {/* REPLACE WITH props.obj.status or bank.status */}
