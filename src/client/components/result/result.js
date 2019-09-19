@@ -33,11 +33,13 @@ export default function result() {
     });
 
     useEffect(() => {
-        if (showModal) {
-            document.querySelector("body, html").classList.add("no-scroll");
-            return;
+        if (window.innerWidth <= 767) {
+            if (showModal) {
+                document.querySelector("body, html").classList.add("no-scroll");
+                return;
+            }
+            document.querySelector("body, html").classList.remove("no-scroll");
         }
-        document.querySelector("body, html").classList.remove("no-scroll");
     }, [showModal]);
 
     const [posLatitude, setposLatitude] = useState(-181);

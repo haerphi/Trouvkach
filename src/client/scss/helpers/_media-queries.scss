@@ -18,6 +18,7 @@
     }
 
     .box-wrapper {
+        display: none;
         .leaflet-map-container,
         .item-description-container {
             display: none;
@@ -73,7 +74,7 @@
                 display: inline-block;
                 width: 75%;
                 height: 75%;
-                top: calc(50% - 10vmin);
+                top: calc(50% - 5vmin);
                 left: 50%;
                 margin: 5vmin 0;
                 overflow-y: auto;
