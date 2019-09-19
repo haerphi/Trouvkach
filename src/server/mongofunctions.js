@@ -43,10 +43,12 @@ export const mongoRequestZoom = async (long, lat, dist) => {
                     maxDistance: parseInt(dist),
                 },
             },
+            {$limit: 5000},
         ])
         .toArray();
 
     client.close();
+    console.log(items.length);
 
     const rep = {
         truc: items,
@@ -55,23 +57,35 @@ export const mongoRequestZoom = async (long, lat, dist) => {
 };
 
 export const mongomodify = async (id, champ, value) => {
-    console.log(`Modify : ${id} -> ${champ} = ${value}`);
+    if (id !== "undefined" && value !== "undefined") {
+        console.log(`Modify : ${id} -> ${champ} = ${value}`);
+        let newValue = value;
+        if (newValue === "true") {
+            newValue = true;
+        } else if (newValue === "false") {
+            newValue = false;
+        }
 
-    const client = await mongo.connect(url, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
-    const db = client.db("trouvkash");
-    const collection = db.collection("terminals");
+        const client = await mongo.connect(url, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        const db = client.db("trouvkash");
+        const collection = db.collection("terminals");
 
-    const modify = {};
-    modify[champ] = value;
-    collection.updateOne({_id: ObjectId(id)}, {$set: modify});
+        const modify = {};
+        modify[champ] = newValue;
+        collection.updateOne({_id: ObjectId(id)}, {$set: modify});
 
-    client.close();
+        client.close();
 
+        const rep = {
+            truc: "Modification effectuée (enfin peux-être)",
+        };
+        return rep;
+    }
     const rep = {
-        truc: "Modification effectuée (enfin peux-être)",
+        truc: "id undefined",
     };
     return rep;
 };
