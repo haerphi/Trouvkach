@@ -81,7 +81,7 @@ export default function result() {
 
     return (
         <Fragment>
-            <Container max-width={"lg"}>
+            <Container className={"sticky-search-bar"} max-width={"lg"}>
                 <SearchBar onPositionChange={HandleSearchedPosition} />
             </Container>
 
