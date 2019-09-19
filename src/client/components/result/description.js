@@ -7,11 +7,6 @@ export default function Description(props) {
     const [empty, setEmpty] = useState(!!props.obj.empty);
 
     useEffect(() => {
-        if (props.obj.empty) {
-            console.log(props.obj.empty);
-        } else {
-            console.log("Ma bite sur ton front ça fait un dindon");
-        }
         setEmpty(props.obj.empty);
         props.obj.empty &&
             utils.updateTerminal(props.obj._id, "empty", props.obj.empty);
@@ -23,7 +18,6 @@ export default function Description(props) {
         } else {
             props.obj.empty = true;
         }
-        console.log(props.obj.empty);
         setEmpty(props.obj.empty);
     };
 
