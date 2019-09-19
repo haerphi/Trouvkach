@@ -1,16 +1,16 @@
 @media screen and (max-width: 767px) {
-    .sticky-search-bar {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        pointer-events: none;
+    @supports (position: sticky) {
+        .sticky-search-bar {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
     }
 
     .search-input-wrapper {
         margin-left: 30%;
         padding-top: 16px;
         padding-bottom: 0;
-        pointer-events: all;
 
         .search-input-container {
             max-width: 100%;

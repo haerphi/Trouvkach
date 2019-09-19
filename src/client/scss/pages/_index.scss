@@ -13,9 +13,14 @@
     position: relative;
 }
 
+.sticky-search-bar {
+    pointer-events: none;
+}
+
 .search-input-wrapper {
     position: relative;
     border-radius: 4px;
+    pointer-events: all;
 
     .search-results {
         display: none;
