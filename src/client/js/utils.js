@@ -118,7 +118,6 @@ exports.getTerminalAsync = async (long, lat, zoom) => {
     return data;
 };
 
-// eslint-disable-next-line require-await
 exports.updateTerminal = async (id, champ, value) => {
     const test = `/api/modify/${id}/${champ}/${value}`;
     console.log(test);
