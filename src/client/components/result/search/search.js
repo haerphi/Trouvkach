@@ -86,7 +86,7 @@ export default function SearchBar(props) {
                 <SearchIcon />
             </div>
             <InputBase
-                placeholder={"Search…"}
+                placeholder={"Search by address..."}
                 classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,

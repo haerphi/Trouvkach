@@ -13,7 +13,7 @@
         height: auto !important;
     }
     .box-wrapper {
-        #leaflet-map,
+        .leaflet-map-container,
         .item-description-container {
             display: none;
         }
@@ -58,7 +58,7 @@
                 }
             }
 
-            #leaflet-map,
+            .leaflet-map-container,
             .item-description-container {
                 display: inherit !important;
             }
@@ -70,7 +70,7 @@
                 height: 75%;
                 top: calc(50% - 10vmin);
                 left: 50%;
-                margin: 10vmin 0;
+                margin: 5vmin 0;
                 overflow-y: auto;
                 -webkit-transform: translate(-50%, -50%);
                 -ms-transform: translate(-50%, -50%);
@@ -83,7 +83,7 @@
             }
         }
 
-        #leaflet-map,
+        .leaflet-map-container,
         .item-description-container {
             position: relative !important;
         }
@@ -93,7 +93,7 @@
             width: auto;
         }
 
-        #leaflet-map {
+        .leaflet-map-container {
             height: calc(25vmin + 10rem) !important;
         }
     }
@@ -123,20 +123,23 @@
 }
 
 @media screen and (min-width: 767px) {
+    .leaflet-map-container {
+        height: 40vh;
+        min-height: 25rem;
+        background-color: #fff;
+        border-radius: 4px;
+        padding: 1vmin;
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+            0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+            0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    }
+
     .box-wrapper {
         position: relative;
         z-index: 2;
-        margin-top: 50vh;
+        padding-top: 100px;
         width: calc(100% - 30rem);
         margin-left: 30rem;
-    }
-
-    #leaflet-map {
-        position: fixed !important;
-        top: 64px;
-        left: 0;
-        right: 0;
-        z-index: 999999999;
     }
 
     .search-input-container {
@@ -167,13 +170,11 @@
 }
 
 @media screen and (min-width: 767px) and (max-width: 1100px) {
-    #leaflet-map {
+    .leaflet-map-container {
         height: calc(45vh - 64px) !important;
     }
 
     .results-items-background {
-        top: 45vh;
-        height: 55vh;
         width: 35vmin;
     }
 
@@ -194,8 +195,10 @@
     .search-input-container {
         right: 24px;
     }
-    .item-description-container {
-        margin: 3vmin 0;
+    @media screen and (min-width: 960px) {
+        .search-input-container {
+            right: 32px;
+        }
     }
 }
 
