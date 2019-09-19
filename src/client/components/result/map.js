@@ -17,6 +17,15 @@ export default function mapCtnr(props) {
         props.onZoom(evt.target._zoom);
     };
 
+    let AllAtm;
+    if (props.list) {
+        AllAtm = props.list.map(elem => (
+            <Marker key={elem._id} position={[elem.latitude, elem.longitude]}>
+                <Popup>{"a bank"}</Popup>
+            </Marker>
+        ));
+    }
+
     return (
         <Map
             id={"leaflet-map"}
@@ -35,6 +44,7 @@ export default function mapCtnr(props) {
                 }
                 url={"https://{s}.tile.osm.org/{z}/{x}/{y}.png"}
             />
+            {AllAtm}
             <Marker position={[lat, lng]}>
                 <Popup>{"Your Position"}</Popup>
             </Marker>
