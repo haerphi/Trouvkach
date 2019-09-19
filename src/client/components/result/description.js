@@ -1,8 +1,32 @@
-import React, {Fragment} from "react";
+import React, {Fragment, useEffect, useState} from "react";
 import {Paper, Typography} from "@material-ui/core";
 import DescriptionButtons from "./description-buttons/buttons";
+import utils from "./../../js/utils";
 
 export default function Description(props) {
+    const [empty, setEmpty] = useState(!!props.obj.empty);
+
+    useEffect(() => {
+        if (props.obj.empty) {
+            console.log(props.obj.empty);
+        } else {
+            console.log("Ma bite sur ton front ça fait un dindon");
+        }
+        setEmpty(props.obj.empty);
+        props.obj.empty &&
+            utils.updateTerminal(props.obj._id, "empty", props.obj.empty);
+    }, [props.obj.empty]);
+
+    const handleChangeEmpty = () => {
+        if (props.obj.empty) {
+            props.obj.empty = false;
+        } else {
+            props.obj.empty = true;
+        }
+        console.log(props.obj.empty);
+        setEmpty(props.obj.empty);
+    };
+
     return (
         <div className={"item-description-container"}>
             <Paper
@@ -10,7 +34,10 @@ export default function Description(props) {
                     padding: "3vmin calc(1vmin + 0.5rem)",
                 }}>
                 <Typography
-                    style={{marginBottom: "20px", fontFamily: "Roboto-Regular"}}
+                    style={{
+                        marginBottom: "20px",
+                        fontFamily: "Roboto-Regular",
+                    }}
                     component={"p"}
                     align={"center"}>
                     {"Item's Description!"}
@@ -26,7 +53,10 @@ export default function Description(props) {
                     <div className={"description-buttons"}>
                         <Fragment>
                             <p>{"Terminal actions:"}</p>
-                            <DescriptionButtons obj={props.obj} />
+                            <DescriptionButtons
+                                empty={empty}
+                                handleEmpty={handleChangeEmpty}
+                            />
                             {/* REPLACE WITH props.obj.status or bank.status */}
                         </Fragment>
                     </div>

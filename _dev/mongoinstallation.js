@@ -22,6 +22,7 @@ const updateBD = async url => {
         console.log(i);
         collection.updateOne({_id: element._id}, {$set: element});
     }
+    console.log("2dsphere");
     await collection.createIndex({location: "2dsphere"});
     client.close();
 };
@@ -42,7 +43,7 @@ const verify = async url => {
         .limit(1)
         .toArray();
     if (!Object.prototype.hasOwnProperty.call(items[0], "location")) {
-        updateBD();
+        updateBD(url);
     }
     console.log("connexion closed !");
     client.close();
@@ -66,12 +67,14 @@ const index = async url => {
     client.close();
 };
 
-const choix = process.argv[2];
-const remoteOrLocal = process.argv[3];
+const remoteOrLocal = process.argv[2];
+const choix = process.argv[3];
+
 let uri = urlRemote;
 if (typeof remoteOrLocal != "undefined") {
     if (remoteOrLocal.toLocaleLowerCase() === "l") {
         uri = urlLocal;
+        console.log(uri);
     }
 }
 if (typeof choix != "undefined") {

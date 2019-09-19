@@ -42,7 +42,7 @@ export default function result() {
 
     const [posLatitude, setposLatitude] = useState(-181);
     const [posLongitude, setposLongitude] = useState(-181);
-    const [zoom, setZoom] = useState(16);
+    const [zoom, setZoom] = useState(14);
 
     const [itemLatitude, setItemLatitude] = useState(-181);
     const [itemLongitude, setItemLongitude] = useState(-181);
