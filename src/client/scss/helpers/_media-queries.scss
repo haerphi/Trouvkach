@@ -1,12 +1,7 @@
 @media screen and (max-width: 767px) {
-    @supports (position: sticky) {
-        .sticky-search-bar {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
+    .sticky-search-bar {
+        z-index: 10;
     }
-
     .search-input-wrapper {
         margin-left: 30%;
         padding-top: 16px;
@@ -129,6 +124,16 @@
 }
 
 @media screen and (min-width: 767px) {
+    @supports (position: sticky) or (position: -ms-sticky) or
+        (position: -webkit-sticky) {
+        .sticky-search-bar {
+            position: -webkit-sticky;
+            position: -ms-sticky;
+            position: sticky;
+            top: -74px;
+        }
+    }
+
     .leaflet-map-container {
         height: 40vh;
         min-height: 25rem;
@@ -148,17 +153,10 @@
         margin-left: 30rem;
     }
 
-    .sticky-search-bar {
-        position: sticky;
-        top: -83px;
-        z-index: 10;
-        pointer-events: none;
-    }
-
     .search-input-wrapper {
         margin-left: 30rem;
-        padding-top: 100px;
-        padding-bottom: 32px;
+        padding-top: 90px;
+        padding-bottom: 8px;
         pointer-events: all;
 
         .search-input-container {
