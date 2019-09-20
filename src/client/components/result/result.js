@@ -40,11 +40,13 @@ export default function result() {
     });
 
     useEffect(() => {
-        if (showModal) {
-            document.querySelector("body, html").classList.add("no-scroll");
-            return;
+        if (window.innerWidth <= 767) {
+            if (showModal) {
+                document.querySelector("body, html").classList.add("no-scroll");
+                return;
+            }
+            document.querySelector("body, html").classList.remove("no-scroll");
         }
-        document.querySelector("body, html").classList.remove("no-scroll");
     }, [showModal]);
 
     const [posLatitude, setposLatitude] = useState(-181);
@@ -88,7 +90,7 @@ export default function result() {
 
     return (
         <Fragment>
-            <Container max-width={"lg"}>
+            <Container className={"sticky-search-bar"} max-width={"lg"}>
                 <SearchBar onPositionChange={HandleSearchedPosition} />
             </Container>
             <Container

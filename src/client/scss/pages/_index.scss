@@ -3,6 +3,7 @@
 }
 
 .box-wrapper {
+    margin-top: 16px;
     .modal-close-button {
         display: none;
     }
@@ -12,33 +13,25 @@
     position: relative;
 }
 
-.search-input-container {
-    position: fixed;
-    top: 15px;
-    right: calc(50% - (640px - 32px));
-    width: auto;
-    margin: 0 auto;
-    border-radius: 4px;
-    background-color: rgba(0, 0, 0, 0.15);
-    z-index: 999999;
+.sticky-search-bar {
+    position: relative;
+    pointer-events: none;
+}
 
-    &:hover {
-        background-color: rgba(0, 0, 0, 0.25);
-    }
+.search-input-wrapper {
+    position: relative;
+    border-radius: 4px;
+    pointer-events: all;
 
     .search-results {
         display: none;
-    }
-
-    .Mui-focused ~ .search-results {
-        display: block;
         position: absolute;
         top: 100%;
         left: 0;
         right: 0;
         width: 100%;
         height: auto;
-        max-height: 50vmin;
+        max-height: 50vh;
         overflow-y: auto;
         background-color: #f5f5f5;
         box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
@@ -67,15 +60,32 @@
             }
         }
     }
+
+    .search-input-container {
+        position: relative;
+        margin: 0 auto;
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+            0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+            0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+        &.show-results {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            .search-results {
+                display: block;
+            }
+        }
+    }
 }
 
 .results-items-background {
     display: inline-block;
     position: fixed;
-    top: 50vh;
+    top: 64px;
     left: calc(50% - (640px - 32px));
     width: 25rem;
-    height: 50vh;
+    height: calc(100vh - 64px);
     background-color: #fff;
     border-right: 1.5px solid rgba(0, 0, 0, 0.12);
 
@@ -142,7 +152,7 @@
     position: relative;
     display: inline-block;
     width: 100%;
-    margin: 10vmin 0;
+    margin: 3vmin 0;
 }
 
 /* LEAFLET STYLES */

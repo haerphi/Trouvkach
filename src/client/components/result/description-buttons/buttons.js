@@ -37,7 +37,7 @@ export default function descriptionButtons(props) {
                 color={"primary"}
                 className={classes.button}
                 onClick={props.handleEmpty}>
-                {props.emptyValue ? "fulled" : "empty"}
+                {props.emptyValue ? "filled" : "empty"}
                 {props.emptyValue ? (
                     <AttachMoneyIcon className={classes.rightIcon} />
                 ) : (

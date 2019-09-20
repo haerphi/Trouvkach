@@ -35,11 +35,6 @@ export default function TerminalItem(props) {
             2000,
             1000,
         ];
-        console.log(
-            ` zoom:${zoom} = searched Zone:${zommSize[zoom]} /40 =${zommSize[
-                zoom
-            ] / 40} `,
-        );
         return zommSize[zoom];
     };
 
@@ -56,7 +51,7 @@ export default function TerminalItem(props) {
                 const data = await utils.getTerminalAsync(
                     props.longitude,
                     props.latitude,
-                    metresPerPixel(props.zoom),
+                    metresPerPixel(props.zoom) / 2,
                 ); // lat log km
                 let dataArr;
                 if (data.truc.length === 0) {
