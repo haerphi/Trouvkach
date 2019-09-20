@@ -2,8 +2,8 @@ const mongo = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
 
 //A MODIFIER
-//const url = `mongodb+srv://dev:dev@haerphi-trouvkash-jyzbr.mongodb.net/test?retryWrites=true&w=majority`;
-const url = "mongodb://dev:dev@mongo:27017";
+const url = `mongodb+srv://dev:dev@haerphi-trouvkash-jyzbr.mongodb.net/test?retryWrites=true&w=majority`;
+//const url = "mongodb://dev:dev@mongo:27017";
 
 export const mongoRequestBanks = async () => {
     const client = await mongo.connect(url, {
@@ -43,6 +43,7 @@ export const mongoRequestZoom = async (long, lat, dist) => {
                     maxDistance: parseInt(dist),
                 },
             },
+            {$limit: 5000},
         ])
         .toArray();
 
@@ -55,21 +56,34 @@ export const mongoRequestZoom = async (long, lat, dist) => {
 };
 
 export const mongomodify = async (id, champ, value) => {
-    const client = await mongo.connect(url, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
-    const db = client.db("trouvkash");
-    const collection = db.collection("terminals");
+    if (id !== "undefined" && value !== "undefined") {
+        let newValue = value;
+        if (newValue === "true") {
+            newValue = true;
+        } else if (newValue === "false") {
+            newValue = false;
+        }
 
-    const modify = {};
-    modify[champ] = value;
-    collection.updateOne({_id: ObjectId(id)}, {$set: modify});
+        const client = await mongo.connect(url, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        const db = client.db("trouvkash");
+        const collection = db.collection("terminals");
 
-    client.close();
+        const modify = {};
+        modify[champ] = newValue;
+        collection.updateOne({_id: ObjectId(id)}, {$set: modify});
 
+        client.close();
+
+        const rep = {
+            truc: "Modification effectuée (enfin peux-être)",
+        };
+        return rep;
+    }
     const rep = {
-        truc: "Modification effectuée (enfin peux-être)",
+        truc: "id undefined",
     };
     return rep;
 };

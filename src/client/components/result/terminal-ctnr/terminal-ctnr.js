@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import utils from "../../../js/utils";
 import ViewTerminal from "./view-terminal";
+import EmptyTerminal from "./empty-terminal";
 
 export default function TerminalItem(props) {
     const [terminal, setTerminal] = useState([]);
@@ -50,16 +51,22 @@ export default function TerminalItem(props) {
                 const data = await utils.getTerminalAsync(
                     props.longitude,
                     props.latitude,
-                    metresPerPixel(props.zoom) / 50,
+                    metresPerPixel(props.zoom) / 2,
                 ); // lat log km
-                const dataArr = data.truc.map(item => (
-                    <ViewTerminal
-                        key={item._id}
-                        view={item.address}
-                        obj={item}
-                        setdescription={props.setDesc}
-                    />
-                ));
+                let dataArr;
+                if (data.truc.length === 0) {
+                    dataArr = <EmptyTerminal />;
+                } else {
+                    dataArr = data.truc.map(item => (
+                        <ViewTerminal
+                            key={item._id}
+                            view={item.address}
+                            obj={item}
+                            setdescription={props.setDesc}
+                        />
+                    ));
+                }
+                props.onSetResultLIst(data); // used to pass the total list to the map
                 setTerminal(dataArr);
             })();
         }

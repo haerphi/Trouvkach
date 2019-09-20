@@ -6,11 +6,18 @@ import Description from "./description";
 
 import SearchBar from "./search/search";
 
+let resultList;
+
 export default function result() {
     const modalRef = useRef(null);
     const resultsContainerRef = useRef(null);
-
+    const [resultLists, HandleresultLists] = useState(resultList);
     const [showModal, setShowModal] = useState(false);
+
+    const SetResultLIst = NewList => {
+        //resultList = NewList.truc;
+        HandleresultLists(NewList.truc);
+    };
 
     function handleClickOutside(event) {
         if (window.innerWidth <= 767) {
@@ -33,16 +40,18 @@ export default function result() {
     });
 
     useEffect(() => {
-        if (showModal) {
-            document.querySelector("body, html").classList.add("no-scroll");
-            return;
+        if (window.innerWidth <= 767) {
+            if (showModal) {
+                document.querySelector("body, html").classList.add("no-scroll");
+                return;
+            }
+            document.querySelector("body, html").classList.remove("no-scroll");
         }
-        document.querySelector("body, html").classList.remove("no-scroll");
     }, [showModal]);
 
     const [posLatitude, setposLatitude] = useState(-181);
     const [posLongitude, setposLongitude] = useState(-181);
-    const [zoom, setZoom] = useState(16);
+    const [zoom, setZoom] = useState(14);
 
     const [itemLatitude, setItemLatitude] = useState(-181);
     const [itemLongitude, setItemLongitude] = useState(-181);
@@ -80,10 +89,9 @@ export default function result() {
 
     return (
         <Fragment>
-            <Container max-width={"lg"}>
+            <Container className={"sticky-search-bar"} max-width={"lg"}>
                 <SearchBar onPositionChange={HandleSearchedPosition} />
             </Container>
-
             <Container
                 maxWidth={"lg"}
                 className={"container content-container"}>
@@ -99,6 +107,7 @@ export default function result() {
                             onitemLongitude={itemLongitude}
                             obj={itemObj}
                             onZoom={setZoom}
+                            list={resultLists}
                         />
                         <Description obj={itemObj} />
                     </div>
@@ -114,6 +123,7 @@ export default function result() {
                     latitude={posLatitude}
                     longitude={posLongitude}
                     zoom={zoom}
+                    onSetResultLIst={SetResultLIst}
                 />
             </Container>
         </Fragment>

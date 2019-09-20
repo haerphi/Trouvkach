@@ -118,15 +118,14 @@ exports.getTerminalAsync = async (long, lat, zoom) => {
     return data;
 };
 
-// eslint-disable-next-line require-await
-exports.updateTerminalStatus = async (id, value) => {
-    // const response = await fetch(`/api/modify/${id}/status/${value}`, {
-    //     headers: {
-    //         Accept: "application/json",
-    //         "Content-Type": "application/json",
-    //     },
-    //     method: "POST",
-    // });
-    // const data = await response.json();
-    // console.log(data.truc);
+exports.updateTerminal = async (id, champ, value) => {
+    const test = `/api/modify/${id}/${champ}/${value}`;
+    const response = await fetch(test, {
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+        },
+        method: "POST",
+    });
+    const data = await response.json();
 };

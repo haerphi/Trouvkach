@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import InputBase from "@material-ui/core/InputBase";
 import {makeStyles} from "@material-ui/core/styles";
 import SearchIcon from "@material-ui/icons/Search";
@@ -17,26 +17,41 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        color: "#fff",
+        color: "rgba(0, 0, 0, 0.85)",
     },
     inputRoot: {
-        color: "#fff",
+        display: "block",
+        color: "rgba(0, 0, 0, 0.85)",
     },
     inputInput: {
         padding: theme.spacing(1, 1, 1, 7),
-        transition: theme.transitions.create("width"),
-        width: "100%",
-        [theme.breakpoints.up(767)]: {
-            width: 180,
-            "&:focus": {
-                width: 260,
-            },
-        },
+        width: "calc(100% - 64px)",
     },
 }));
 
 export default function SearchBar(props) {
+    const searchResultsContainerRef = useRef(null);
+    const [showSearchResults, setShowSearchResults] = useState(false);
+
     const [searchResult, setSearchResult] = useState("");
+
+    function handleClickOutside(event) {
+        if (
+            searchResultsContainerRef.current &&
+            searchResultsContainerRef.current.contains(event.target)
+        ) {
+            setShowSearchResults(true);
+        } else {
+            setShowSearchResults(false);
+        }
+    }
+
+    useEffect(() => {
+        document.addEventListener("click", handleClickOutside);
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    });
 
     const debounceValue = [null, ""];
 
@@ -50,6 +65,7 @@ export default function SearchBar(props) {
         const HandleResetSearch = () => {
             debounceValue[1] = "";
             setSearchResult("");
+            setShowSearchResults(false);
         };
 
         const searchResultTemp = searchedData.features.map(item => (
@@ -74,28 +90,36 @@ export default function SearchBar(props) {
         if (debounceValue[0] == null) {
             debounceValue[1] = evt.target.value;
             debounceValue[0] = setTimeout(searchFetchAndDisplay, 1000);
+            setShowSearchResults(true);
         } else {
             clearTimeout(debounceValue[0]);
             debounceValue[1] = evt.target.value;
             debounceValue[0] = setTimeout(searchFetchAndDisplay, 1000);
+            setShowSearchResults(true);
         }
     };
     return (
-        <div className={"search-input-container"}>
-            <div className={classes.searchIcon}>
-                <SearchIcon />
+        <div className={"search-input-wrapper"}>
+            <div
+                ref={searchResultsContainerRef}
+                className={`search-input-container ${
+                    showSearchResults ? "show-results" : ""
+                }`}>
+                <div className={classes.searchIcon}>
+                    <SearchIcon />
+                </div>
+                <InputBase
+                    placeholder={"Search by address..."}
+                    classes={{
+                        root: classes.inputRoot,
+                        input: classes.inputInput,
+                    }}
+                    className={"search-input no-select"}
+                    inputProps={{"aria-label": "search"}}
+                    onInput={HandleInputsearch}
+                />
+                <ul className={"search-results"}>{searchResult}</ul>
             </div>
-            <InputBase
-                placeholder={"Search…"}
-                classes={{
-                    root: classes.inputRoot,
-                    input: classes.inputInput,
-                }}
-                className={"search-input no-select"}
-                inputProps={{"aria-label": "search"}}
-                onInput={HandleInputsearch}
-            />
-            <ul className={"search-results"}>{searchResult}</ul>
         </div>
     );
 }
