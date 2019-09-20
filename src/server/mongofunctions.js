@@ -55,8 +55,6 @@ export const mongoRequestZoom = async (long, lat, dist) => {
 };
 
 export const mongomodify = async (id, champ, value) => {
-    console.log(`Modify : ${id} -> ${champ} = ${value}`);
-
     const client = await mongo.connect(url, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -98,8 +96,6 @@ export const newTerminal = async (long, lat, bank) => {
             coordinates: [parseFloat(long), parseFloat(lat)],
         },
     };
-    console.log("new ELement : ");
-    console.log(newElement);
     await collection.insertOne(newElement);
     await collection.createIndex({location: "2dsphere"});
 

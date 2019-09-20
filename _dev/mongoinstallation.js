@@ -4,7 +4,6 @@ const urlRemote = `mongodb+srv://dev:dev@haerphi-trouvkash-jyzbr.mongodb.net/tes
 const urlLocal = "mongodb://dev:dev@localhost:27017";
 
 const updateBD = async url => {
-    console.log("UPDATE de la BD");
     const client = await mongo.connect(url, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
@@ -18,8 +17,6 @@ const updateBD = async url => {
             type: "Point",
             coordinates: [element.longitude, element.latitude],
         };
-        console.log(element);
-        console.log(i);
         collection.updateOne({_id: element._id}, {$set: element});
     }
     await collection.createIndex({location: "2dsphere"});
@@ -27,16 +24,12 @@ const updateBD = async url => {
 };
 
 const verify = async url => {
-    console.log("VERIFY de la BD");
     const client = await mongo.connect(url, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
-    console.log("client connected !");
     const db = client.db("trouvkash");
-    console.log("Db found !");
     const collection1 = db.collection("terminals");
-    console.log("collection found !");
     const items = await collection1
         .find({})
         .limit(1)
@@ -44,25 +37,18 @@ const verify = async url => {
     if (!Object.prototype.hasOwnProperty.call(items[0], "location")) {
         updateBD();
     }
-    console.log("connexion closed !");
     client.close();
 };
 
 const index = async url => {
-    console.log("index de la BD");
     const client = await mongo.connect(url, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
     });
-    console.log("client connected !");
     const db = client.db("trouvkash");
-    console.log("Db found !");
     const collection = db.collection("terminals");
-    console.log("collection found !");
     await collection.createIndex({location: "2dsphere"});
-    console.log(`index created for : ${url}`);
 
-    console.log("connexion closed !");
     client.close();
 };
 

@@ -120,7 +120,6 @@ exports.getTerminalAsync = async (long, lat, zoom) => {
 
 // eslint-disable-next-line require-await
 exports.updateTerminalStatus = async (id, value) => {
-    console.log(id, value);
     // const response = await fetch(`/api/modify/${id}/status/${value}`, {
     //     headers: {
     //         Accept: "application/json",

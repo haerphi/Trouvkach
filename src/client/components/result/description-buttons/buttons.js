@@ -24,7 +24,6 @@ const useStyles = makeStyles(theme => ({
 export default function descriptionButtons(props) {
     const classes = useStyles();
     const handleMyFunction = () => {
-        console.log(props.obj);
         utils.updateTerminalStatus(
             props.obj._id,
             typeof props.status === "undefined" ? "FILLED" : props.status,

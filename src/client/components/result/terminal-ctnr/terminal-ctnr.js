@@ -34,11 +34,6 @@ export default function TerminalItem(props) {
             2000,
             1000,
         ];
-        console.log(
-            ` zoom:${zoom} = searched Zone:${zommSize[zoom]} /50 =${zommSize[
-                zoom
-            ] / 50} `,
-        );
         return zommSize[zoom];
     };
 

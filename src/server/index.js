@@ -23,7 +23,6 @@ const app = express();
 app.use(express.static(path.resolve(__dirname, "../../bin/client")));
 
 app.post("/api/search/:longitude/:latitude/:zoom", (req, res) => {
-    console.log(`Zoom`);
     mongoRequestZoom(
         req.params.longitude,
         req.params.latitude,
@@ -34,21 +33,18 @@ app.post("/api/search/:longitude/:latitude/:zoom", (req, res) => {
 });
 
 app.post("/api/search/banks/", (req, res) => {
-    console.log(`Banks`);
     mongoRequestBanks().then(rep => {
         res.send(rep);
     });
 });
 
 app.post("/api/modify/:id/:champ/:value", (req, res) => {
-    console.log("Modify");
     mongomodify(req.params.id, req.params.champ, req.params.value).then(rep => {
         res.send(rep);
     });
 });
 
 app.post("/api/newTerminal/:long/:lat/:bank", (req, res) => {
-    console.log("New Terminal");
     newTerminal(req.params.long, req.params.lat, req.params.bank).then(rep => {
         res.send(rep);
     });

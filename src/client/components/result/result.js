@@ -66,7 +66,6 @@ export default function result() {
     }, []);
 
     const HandleSearchedPosition = NewAdressSearched => {
-        console.log(`new pos`);
         setposLatitude(NewAdressSearched.geometry.coordinates[1]);
         setposLongitude(NewAdressSearched.geometry.coordinates[0]);
     };
