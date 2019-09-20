@@ -1,16 +1,22 @@
 import React from "react";
+//import ReactDOM from "react-dom";
 import ResultCpn from "./result/result";
 import Header from "./header";
-//import ItemCpn from "./item/item";
+//import Loading from "./loading";
 
-const resultPage = <ResultCpn />;
+export default function MainPage() {
+    // const [ShowLoading, setShowLoading] = useState(false);
 
-const MainPage = () => (
-    <React.Fragment>
-        <Header />
-        {resultPage}
-        {/*itemPage modal*/}
-    </React.Fragment>
-);
+    // const loadingPage = props => {
+    //     const modalRoot = document.querySelector("#ModalItemInfo");
+    //     return ReactDOM.createPortal(<Loading />, modalRoot);
+    // };
 
-export default MainPage;
+    return (
+        <React.Fragment>
+            <Header />
+            <ResultCpn />
+            {/*ShowLoading&&loadingPage()*/}
+        </React.Fragment>
+    );
+}

@@ -4,6 +4,7 @@ export default function searchItem(props) {
     const posChange = () => {
         props.onPositionChangeByItem(props.item);
         props.onResetSearch();
+        console.log("research");
     };
 
     return (

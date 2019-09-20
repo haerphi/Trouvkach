@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from "react";
 import utils from "../../../js/utils";
 import ViewTerminal from "./view-terminal";
+import EmptyTerminal from "./empty-terminal";
 
 export default function TerminalItem(props) {
     const [terminal, setTerminal] = useState([]);
@@ -35,9 +36,9 @@ export default function TerminalItem(props) {
             1000,
         ];
         console.log(
-            ` zoom:${zoom} = searched Zone:${zommSize[zoom]} /50 =${zommSize[
+            ` zoom:${zoom} = searched Zone:${zommSize[zoom]} /40 =${zommSize[
                 zoom
-            ] / 50} `,
+            ] / 40} `,
         );
         return zommSize[zoom];
     };
@@ -55,16 +56,22 @@ export default function TerminalItem(props) {
                 const data = await utils.getTerminalAsync(
                     props.longitude,
                     props.latitude,
-                    metresPerPixel(props.zoom) / 50,
+                    metresPerPixel(props.zoom),
                 ); // lat log km
-                const dataArr = data.truc.map(item => (
-                    <ViewTerminal
-                        key={item._id}
-                        view={item.address}
-                        obj={item}
-                        setdescription={props.setDesc}
-                    />
-                ));
+                let dataArr;
+                if (data.truc.length === 0) {
+                    dataArr = <EmptyTerminal />;
+                } else {
+                    dataArr = data.truc.map(item => (
+                        <ViewTerminal
+                            key={item._id}
+                            view={item.address}
+                            obj={item}
+                            setdescription={props.setDesc}
+                        />
+                    ));
+                }
+                props.onSetResultLIst(data); // used to pass the total list to the map
                 setTerminal(dataArr);
             })();
         }
@@ -73,6 +80,7 @@ export default function TerminalItem(props) {
     return (
         <div className={"results-items-background"}>
             <div className={"results-items-container"}>{terminal}</div>
+            {console.log(terminal.length)}
         </div>
     );
 }
