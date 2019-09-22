@@ -1,76 +1,9 @@
 import React from "react";
 import L from "leaflet";
 import {Map, TileLayer, Marker, Popup} from "react-leaflet";
-import {makeStyles} from "@material-ui/styles";
-import BanksMarkerIcon from "../../images/icons/banks-marker-icon.svg";
 import BanksMarkerIconShadow from "../../images/icons/banks-marker-icon-shadow.png";
 
-const bankMarkersStyle = makeStyles({
-    default: {
-        filter:
-            "invert(51%) sepia(94%) saturate(335%) hue-rotate(125deg) brightness(90%) contrast(90%)",
-    },
-    argenta: {
-        filter:
-            "invert(72%) sepia(80%) saturate(5318%) hue-rotate(64deg) brightness(88%) contrast(77%)",
-    },
-    axa: {
-        filter:
-            "invert(10%) sepia(82%) saturate(3506%) hue-rotate(224deg) brightness(101%) contrast(98%)",
-    },
-    belfius: {
-        filter:
-            "invert(15%) sepia(99%) saturate(4524%) hue-rotate(331deg) brightness(74%) contrast(109%)",
-    },
-    beobank: {
-        filter:
-            "invert(16%) sepia(94%) saturate(6612%) hue-rotate(348deg) brightness(85%) contrast(111%)",
-    },
-    bpost: {
-        filter:
-            "invert(13%) sepia(53%) saturate(4441%) hue-rotate(202deg) brightness(90%) contrast(102%)",
-    },
-    crelan: {
-        filter:
-            "invert(34%) sepia(69%) saturate(5148%) hue-rotate(136deg) brightness(96%) contrast(101%)",
-    },
-    cbc: {
-        filter:
-            "invert(66%) sepia(98%) saturate(4260%) hue-rotate(165deg) brightness(100%) contrast(98%)",
-    },
-    kbc: {
-        filter:
-            "invert(66%) sepia(98%) saturate(4260%) hue-rotate(165deg) brightness(100%) contrast(98%)",
-    },
-    keytrade: {
-        filter:
-            "invert(15%) sepia(59%) saturate(1503%) hue-rotate(180deg) brightness(89%) contrast(107%)",
-    },
-    bnp_paribas: {
-        filter:
-            "invert(33%) sepia(96%) saturate(1984%) hue-rotate(147deg) brightness(94%) contrast(103%)",
-    },
-    ing: {
-        filter:
-            "invert(50%) sepia(66%) saturate(1903%) hue-rotate(358deg) brightness(102%) contrast(110%)",
-    },
-    bkcp: {
-        filter:
-            "invert(19%) sepia(99%) saturate(1552%) hue-rotate(198deg) brightness(95%) contrast(91%)",
-    },
-    delta_lioyd: {
-        filter:
-            "invert(50%) sepia(74%) saturate(3781%) hue-rotate(167deg) brightness(96%) contrast(101%)",
-    },
-    deutsche: {
-        filter:
-            "invert(14%) sepia(69%) saturate(3088%) hue-rotate(201deg) brightness(92%) contrast(103%)",
-    },
-});
-
 export default function mapCtnr(props) {
-    const banks = bankMarkersStyle();
-
     /*
     const [lat, setLat] = useState(13);
     const [lng, setlng] = useState(0.59);
@@ -89,42 +22,17 @@ export default function mapCtnr(props) {
     let AllAtm;
     if (props.list) {
         AllAtm = props.list.map(elem => {
-            const BanksMarker = new L.Icon({
-                iconUrl: BanksMarkerIcon,
+            const BanksMarker = new L.divIcon({
                 iconSize: new L.Point(32, 38),
                 shadowUrl: BanksMarkerIconShadow,
                 shadowSize: [32, 32],
                 shadowAnchor: new L.Point(9, 12),
-                className: elem.bank
-                    ? elem.bank.color.toLowerCase() === "4a961d"
-                        ? banks.argenta
-                        : elem.bank.color.toLowerCase() === "0b2c81"
-                        ? banks.axa
-                        : elem.bank.color.toLowerCase() === "c30045"
-                        ? banks.belfius
-                        : elem.bank.color.toLowerCase() === "e20019"
-                        ? banks.beobank
-                        : elem.bank.color.toLowerCase() === "003776"
-                        ? banks.bpost
-                        : elem.bank.color.toLowerCase() === "009639"
-                        ? banks.crelan
-                        : elem.bank.color.toLowerCase() === "02acef"
-                        ? banks.cbc
-                        : elem.bank.color.toLowerCase() === "02acef"
-                        ? banks.kbc
-                        : elem.bank.color.toLowerCase() === "002C52"
-                        ? banks.keytrade
-                        : elem.bank.color.toLowerCase() === "009b7a"
-                        ? banks.bnp_paribas
-                        : elem.bank.color.toLowerCase() === "ff7f00"
-                        ? banks.ing
-                        : elem.bank.color.toLowerCase() === "10519b"
-                        ? banks.bkcp
-                        : elem.bank.color.toLowerCase() === "009fda"
-                        ? banks.delta_lioyd
-                        : elem.bank.color.toLowerCase() === "003777" &&
-                          banks.deutsche
-                    : banks.default,
+                className: "leaflet-marker-icon",
+                html: `<?xml version="1.0" ?><svg height="24" version="1.1" width="24" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><g transform="translate(0 -1028.4)"><path d="m12 0c-4.4183 2.3685e-15 -8 3.5817-8 8 0 1.421 0.3816 2.75 1.0312 3.906 0.1079 0.192 0.221 0.381 0.3438 0.563l6.625 11.531 6.625-11.531c0.102-0.151 0.19-0.311 0.281-0.469l0.063-0.094c0.649-1.156 1.031-2.485 1.031-3.906 0-4.4183-3.582-8-8-8zm0 4c2.209 0 4 1.7909 4 4 0 2.209-1.791 4-4 4-2.2091 0-4-1.791-4-4 0-2.2091 1.7909-4 4-4z" fill=#${
+                    elem.bank ? elem.bank.color : "26a69a"
+                } transform="translate(0 1028.4)"/><path d="m12 3c-2.7614 0-5 2.2386-5 5 0 2.761 2.2386 5 5 5 2.761 0 5-2.239 5-5 0-2.7614-2.239-5-5-5zm0 2c1.657 0 3 1.3431 3 3s-1.343 3-3 3-3-1.3431-3-3 1.343-3 3-3z" fill=#${
+                    elem.bank ? elem.bank.color : "26a69a"
+                } transform="translate(0 1028.4)"/></g></svg>`,
             });
             return (
                 <Marker

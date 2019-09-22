@@ -163,3 +163,20 @@
     top: 40%;
     @extend .no-select;
 }
+.leaflet-marker-icon {
+    svg {
+        transform: scale(1.5) translate(3px, 4px) !important;
+    }
+    &::after {
+        position: absolute;
+        content: "";
+        height: 100%;
+        width: 100%;
+        left: 5px;
+        top: -2px;
+        background: url("./images/icons/banks-marker-icon-shadow.png");
+        background-size: cover;
+        background-repeat: no-repeat;
+        z-index: -1;
+    }
+}
