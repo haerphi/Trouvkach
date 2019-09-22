@@ -109,7 +109,11 @@ export default function result() {
                             onZoom={setZoom}
                             list={resultLists}
                         />
-                        <Description obj={itemObj} />
+                        <Description
+                            latitude={posLatitude}
+                            longitude={posLongitude}
+                            obj={itemObj}
+                        />
                     </div>
                 </div>
             </Container>

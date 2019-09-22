@@ -6,6 +6,9 @@ import utils from "./../../js/utils";
 export default function Description(props) {
     const [empty, setEmpty] = useState(!!props.obj.empty);
 
+    const myLatitude = props.latitude;
+    const myLongitude = props.longitude;
+
     useEffect(() => {
         setEmpty(props.obj.empty);
     }, [props.obj.empty]);
@@ -75,6 +78,19 @@ export default function Description(props) {
                             {props.obj.dist &&
                                 `${Math.trunc(props.obj.dist.calculated)}m`}
                         </p>
+
+                        <p>
+                            <a
+                                href={`https://maps.google.com/?saddr=${myLatitude},${myLongitude}&daddr=${props.obj.latitude},${props.obj.longitude}`}
+                                target={"_blank"}
+                                className={"google-maps-dir-link"}
+                                style={{
+                                    fontWeight: "600",
+                                }}>
+                                {"Google maps directions"}
+                            </a>
+                        </p>
+
                         <div className={"description-buttons"}>
                             <p>
                                 <span
