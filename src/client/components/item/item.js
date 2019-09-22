@@ -14,6 +14,6 @@ export default function item(props) {
             <div>{props.obj.bank.name}</div>
             <div>{`${props.obj.dist.calculated} m`}</div>
         </div>,
-        document.querySelector("#ModalItemInfo"),
+        /*  document.querySelector("#ModalItemInfo"), */
     );
 }
