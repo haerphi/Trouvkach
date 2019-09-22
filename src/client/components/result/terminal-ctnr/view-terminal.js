@@ -6,6 +6,12 @@ export default function viewTerminal(props) {
     // si je recois une string dans props.obj.adress alors j'ai l'adress. je l'ecris
     // sinon, c'est une promise, je l'insere dans un un state, je fait un useeffect et des que la promise change de pending a quelquechose, j'affiche ce quelquechose via le useeffect ( le state est immutable)
     const [address, setAddress] = useState(props.obj.address);
+    const [active, setActive] = useState(props.isActive);
+
+    useEffect(() => {
+        setActive(props.isActive);
+    }, [props.isActive]);
+
     if (typeof props.obj.address != "string") {
         useEffect(() => {
             (async () => {
@@ -18,12 +24,13 @@ export default function viewTerminal(props) {
     const setdesc = () => {
         props.obj.address = address;
         props.setdescription(props.obj, true);
+        props.setIsActive();
     };
 
     return (
         <ButtonBase
             component={"ul"}
-            className={"results-item"}
+            className={`results-item ${active && "active"}`}
             style={{display: "block"}}
             onClick={setdesc}>
             <li

@@ -5,6 +5,8 @@ import EmptyTerminal from "./empty-terminal";
 
 export default function TerminalItem(props) {
     const [terminal, setTerminal] = useState([]);
+    const [active, setActive] = useState(null);
+
     /*useEffect(yourCallback, []) - will trigger the callback only after the first render.Detailed explanation
     useEffect runs by default after every render of the component (thus causing an effect).
     When placing useEffect in your component you tell React you want to run the callback as an effect. React will run the effect after rendering and after performing the DOM updates.
@@ -57,12 +59,15 @@ export default function TerminalItem(props) {
                 if (data.truc.length === 0) {
                     dataArr = <EmptyTerminal />;
                 } else {
+                    setActive(active);
                     dataArr = data.truc.map(item => (
                         <ViewTerminal
                             key={item._id}
                             view={item.address}
                             obj={item}
                             setdescription={props.setDesc}
+                            setIsActive={() => setActive(item._id)}
+                            isActive={active === item._id}
                         />
                     ));
                 }
@@ -70,7 +75,7 @@ export default function TerminalItem(props) {
                 setTerminal(dataArr);
             })();
         }
-    }, [props.latitude, props.longitude, props.zoom]); // pour l'explication du tableau, voir plus haut ^^
+    }, [props.latitude, props.longitude, props.zoom, active]); // pour l'explication du tableau, voir plus haut ^^
 
     return (
         <div className={"results-items-background"}>
