@@ -30,7 +30,9 @@ export default function viewTerminal(props) {
     return (
         <ButtonBase
             component={"ul"}
-            className={`results-item ${active && "active"}`}
+            className={`results-item ${active ? "active" : ""} ${
+                props.obj.delete ? "deleted-item" : ""
+            }`}
             style={{display: "block"}}
             onClick={setdesc}>
             <li
