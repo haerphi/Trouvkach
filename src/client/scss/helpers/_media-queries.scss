@@ -2,6 +2,7 @@
     .sticky-search-bar {
         z-index: 10;
     }
+
     .search-input-wrapper {
         margin-left: 30%;
         padding-top: 16px;
@@ -14,6 +15,7 @@
 
     .box-wrapper {
         display: none;
+
         .leaflet-map-container,
         .item-description-container {
             display: none;
@@ -67,7 +69,7 @@
             .box {
                 position: absolute;
                 display: inline-block;
-                width: 75%;
+                width: 90%;
                 height: 75%;
                 top: calc(50% - 5vmin);
                 left: 50%;
@@ -124,8 +126,7 @@
 }
 
 @media screen and (min-width: 767px) {
-    @supports (position: sticky) or (position: -ms-sticky) or
-        (position: -webkit-sticky) {
+    @supports (position: sticky) or (position: -ms-sticky) or (position: -webkit-sticky) {
         .sticky-search-bar {
             position: -webkit-sticky;
             position: -ms-sticky;
@@ -201,6 +202,7 @@
         width: calc(100% - 40vmin);
         margin-left: 40vmin;
     }
+
     .search-input-wrapper {
         margin-left: 40vmin;
     }

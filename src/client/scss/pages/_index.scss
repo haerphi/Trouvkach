@@ -21,7 +21,7 @@
 
 .google-maps-dir-link {
     display: inline-block;
-    color: rgba(38, 166, 154, 0.5);
+    color: rgba(38, 166, 154, 0.7);
     transition: 0.25s all ease-in-out;
 
     &:hover {
@@ -154,12 +154,41 @@
 
         &.active,
         &:hover {
-            background-color: darken(#26a69a, 7);
+            background-color: darken(#26a69a, 7) !important;
             color: #fff !important;
 
             li {
                 color: #fff !important;
             }
+        }
+
+        &.deleted-item {
+            opacity: 0.7;
+            background-color: #f5f5f5 !important;
+
+
+            .item-property {
+                text-decoration: line-through !important;
+            }
+
+            &::after {
+                position: absolute;
+                content: "DELETED";
+                top: calc(100% - 1.85rem);
+                right: 1rem;
+                font-size: 0.75rem;
+                color: #f44336;
+            }
+
+            &.active,
+            &:hover {
+                background-color: darken(#26a69a, 7) !important;
+
+                &::after {
+                    color: #fff;
+                }
+            }
+
         }
     }
 }
@@ -169,6 +198,20 @@
     display: inline-block;
     width: 100%;
     margin: 3vmin 0;
+
+    &.deleted-item {
+
+        p:not(.keep-message) {
+            color: rgba(0, 0, 0, 0.87) !important;
+            text-decoration: line-through !important;
+            opacity: 0.7 !important;
+        }
+
+        a {
+            text-decoration: line-through !important;
+            opacity: 0.7 !important;
+        }
+    }
 }
 
 /* LEAFLET STYLES */
