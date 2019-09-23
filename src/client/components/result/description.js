@@ -5,6 +5,7 @@ import utils from "./../../js/utils";
 
 export default function Description(props) {
     const [empty, setEmpty] = useState(!!props.obj.empty);
+    const [deleted, setDeleted] = useState(!!props.obj.delete);
 
     const myLatitude = props.latitude;
     const myLongitude = props.longitude;
@@ -12,6 +13,10 @@ export default function Description(props) {
     useEffect(() => {
         setEmpty(props.obj.empty);
     }, [props.obj.empty]);
+
+    useEffect(() => {
+        setDeleted(props.obj.delete);
+    }, [props.obj.delete]);
 
     const handleChangeEmpty = () => {
         if (props.obj.empty) {
@@ -23,13 +28,27 @@ export default function Description(props) {
         utils.updateTerminal(props.obj._id, "empty", props.obj.empty);
     };
 
+    const handleChangeDelete = () => {
+        if (props.obj.delete) {
+            props.obj.delete = false;
+        } else {
+            props.obj.delete = true;
+        }
+        setDeleted(props.obj.delete);
+        utils.updateTerminal(props.obj._id, "delete", props.obj.delete);
+    };
+
     return (
-        <div className={"item-description-container"}>
+        <div
+            className={`item-description-container ${
+                deleted ? "deleted-item" : ""
+            }`}>
             <Paper
                 style={{
                     padding: "3vmin calc(1vmin + 0.5rem)",
                 }}>
                 <Typography
+                    className={"keep-message"}
                     style={{
                         marginBottom: "20px",
                         fontFamily: "Roboto-Regular",
@@ -91,8 +110,22 @@ export default function Description(props) {
                             </a>
                         </p>
 
+                        {deleted && (
+                            <p className={"keep-message"}>
+                                <span
+                                    style={{
+                                        fontWeight: "600",
+                                        color: "#f44336",
+                                    }}>
+                                    {
+                                        "This ATM does no longer exist, it was reported as DELETED by one of our users"
+                                    }
+                                </span>
+                            </p>
+                        )}
+
                         <div className={"description-buttons"}>
-                            <p>
+                            <p className={"keep-message"}>
                                 <span
                                     style={{
                                         fontWeight: "600",
@@ -103,6 +136,8 @@ export default function Description(props) {
                             <DescriptionButtons
                                 emptyValue={empty}
                                 handleEmpty={handleChangeEmpty}
+                                deleteValue={deleted}
+                                handleDelete={handleChangeDelete}
                             />
                         </div>
                     </Fragment>
