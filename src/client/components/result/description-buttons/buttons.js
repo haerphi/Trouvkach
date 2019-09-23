@@ -4,6 +4,7 @@ import {makeStyles} from "@material-ui/core/styles";
 import MoneyOffIcon from "@material-ui/icons/MoneyOff"; // EMPTY
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney"; // FILLED
 import DeleteIcon from "@material-ui/icons/Delete"; // DELETE
+import RestoreFromTrashIcon from "@material-ui/icons/RestoreFromTrash"; // UNDELETE
 
 const useStyles = makeStyles(theme => ({
     button: {
@@ -26,14 +27,20 @@ export default function descriptionButtons(props) {
         <Fragment>
             <Button
                 variant={"contained"}
-                color={"secondary"}
+                color={props.deleteValue ? "primary" : "secondary"}
+                onClick={props.handleDelete}
                 className={classes.button}>
-                {"Delete"}
-                <DeleteIcon className={classes.rightIcon} />
+                {props.deleteValue ? "undelete" : "delete"}
+                {props.deleteValue ? (
+                    <RestoreFromTrashIcon className={classes.rightIcon} />
+                ) : (
+                    <DeleteIcon className={classes.rightIcon} />
+                )}
             </Button>
             <Button
                 variant={"contained"}
                 color={"primary"}
+                disabled={props.deleteValue}
                 className={classes.button}
                 onClick={props.handleEmpty}>
                 {props.emptyValue ? "filled" : "empty"}
