@@ -43,6 +43,7 @@ export default function TerminalItem(props) {
     useEffect(() => {
         // pour une fonction async dans un use effect, on appel une fonction qui appel une fonction asynchrone auto appelée soit useEffect(()=>{(async()=>{await something})()});
         // pour que babel ne soit pas faché par l'async/await, il faut inclure @babel/polyfill a la racine du projet dans le premier component
+        setActive(active);
         if (
             props.latitude >= -180 &&
             props.longitude >= -180 &&
@@ -59,7 +60,6 @@ export default function TerminalItem(props) {
                 if (data.truc.length === 0) {
                     dataArr = <EmptyTerminal />;
                 } else {
-                    setActive(active);
                     dataArr = data.truc.map(item => (
                         <ViewTerminal
                             key={item._id}
